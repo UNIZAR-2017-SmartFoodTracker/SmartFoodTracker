@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <style>
+        .ng-hide {
+            display: none!important;
+        }
+    </style>
+    <title ng-bind="title">
+        Campus Manager
+    </title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <base href="/">
+
+    <!-- CSS del sistema obtenidos de bower -->
+    <!-- build:css styles/lib.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+</head>
+
+<body>
+<div>
+    <!-- Inyeccion del layout base de la aplicacion con navbar y contenido -->
+    <div ng-include="'app/layout/layout.html'"></div>
+</div>
+<br>
+
+
+<!-- build:js js/lib.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+<script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- Importacion automatica de modulos individuales y sus ficheros -->
+<!-- build:js js/app.js -->
+<!-- inject:js -->
+<script src="app/app.module.js"></script>
+<script src="app/account/account.module.js"></script>
+<script src="app/account/login/login.module.js"></script>
+<script src="app/buildings/ada/ada.module.js"></script>
+<script src="app/buildings/buildings.module.js"></script>
+<script src="app/buildings/general/general.module.js"></script>
+<script src="app/home/home.module.js"></script>
+<script src="app/layout/layout.module.js"></script>
+<script src="app/layout/navbar/navbar.module.js"></script>
+<script src="app/account/login/login.controller.js"></script>
+<script src="app/account/login/login.service.js"></script>
+<script src="app/buildings/ada/ada.controller.js"></script>
+<script src="app/buildings/general/general.controller.js"></script>
+<script src="app/home/home.controller.js"></script>
+<script src="app/layout/layout.controller.js"></script>
+<script src="app/layout/map/map.directive.js"></script>
+<script src="app/layout/navbar/navbar.directive.js"></script>
+<!-- endinject -->
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Ejecutar Spring" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="es.unizar.smartFoodTracker.SmartFoodTrackerApplication" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <module name="SmartFoodTracker" />
+    <envs />
+    <method>
+      <option name="NpmBeforeRunTask" enabled="true">
+        <package-json value="$PROJECT_DIR$/package.json" />
+        <command value="run" />
+        <scripts>
+          <script value="build" />
+        </scripts>
+        <node-interpreter value="project" />
+        <envs />
+      </option>
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
