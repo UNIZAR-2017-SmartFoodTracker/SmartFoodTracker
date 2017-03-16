@@ -7,7 +7,6 @@
             //Ir agregando nuevos modulos aqui cuando se vayan creando
             'app.account',
             'app.home',
-            'app.layout',
-            'app.buildings']);
+            'app.layout']);
 
 })();
