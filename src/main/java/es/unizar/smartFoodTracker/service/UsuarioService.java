@@ -1,6 +1,7 @@
-package es.unizar.smartFoodTracker.auth.service;
+package es.unizar.smartFoodTracker.service;
 
-import es.unizar.smartFoodTracker.auth.model.Usuario;
+
+import es.unizar.smartFoodTracker.model.Usuario;
 
 /**
  * Created by carlos on 19/03/17.

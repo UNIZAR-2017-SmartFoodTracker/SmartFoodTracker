@@ -1,4 +1,4 @@
-package es.unizar.smartFoodTracker.auth.model;
+package es.unizar.smartFoodTracker.model;
 
 import javax.persistence.*;
 

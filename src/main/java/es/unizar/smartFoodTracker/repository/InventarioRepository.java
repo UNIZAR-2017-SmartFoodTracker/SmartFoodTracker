@@ -1,4 +1,4 @@
-package es.unizar.smartFoodTracker.auth.repository;
+package es.unizar.smartFoodTracker.repository;
 
 /**
  * Created by carlos on 19/03/17.

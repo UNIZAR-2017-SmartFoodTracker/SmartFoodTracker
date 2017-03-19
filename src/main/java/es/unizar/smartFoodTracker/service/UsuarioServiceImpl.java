@@ -1,7 +1,7 @@
-package es.unizar.smartFoodTracker.auth.service;
+package es.unizar.smartFoodTracker.service;
 
-import es.unizar.smartFoodTracker.auth.model.Usuario;
-import es.unizar.smartFoodTracker.auth.repository.UsuarioRepository;
+import es.unizar.smartFoodTracker.model.Usuario;
+import es.unizar.smartFoodTracker.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

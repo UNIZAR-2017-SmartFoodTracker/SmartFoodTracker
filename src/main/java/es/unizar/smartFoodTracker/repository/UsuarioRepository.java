@@ -1,6 +1,6 @@
-package es.unizar.smartFoodTracker.auth.repository;
+package es.unizar.smartFoodTracker.repository;
 
-import es.unizar.smartFoodTracker.auth.model.Usuario;
+import es.unizar.smartFoodTracker.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

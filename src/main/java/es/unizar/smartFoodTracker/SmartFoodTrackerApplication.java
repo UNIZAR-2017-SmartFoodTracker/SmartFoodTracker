@@ -1,4 +1,4 @@
-package es.unizar.smartFoodTracker.auth;
+package es.unizar.smartFoodTracker;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
