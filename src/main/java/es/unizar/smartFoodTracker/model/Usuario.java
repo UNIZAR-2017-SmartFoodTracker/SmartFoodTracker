@@ -18,6 +18,9 @@ public class Usuario {
     private boolean aviso;
     private String password;
 
+    public Usuario() {
+    }
+
     public Usuario(String username, String email, String nombre, String apellidos, boolean aviso, String password) {
         this.username = username;
         this.email = email;

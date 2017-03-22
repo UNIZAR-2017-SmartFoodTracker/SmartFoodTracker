@@ -9,7 +9,8 @@ import java.util.Date;
  */
 
 @Entity
-public class Inventario implements Serializable {
+@IdClass(InventarioID.class)
+public class Inventario {
 
     @Id
     @ManyToOne
@@ -20,9 +21,13 @@ public class Inventario implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idProducto")
     private Producto idProducto;
+
     private int cantidadMinima;
     private int cantidad;
     private Date fechaCaducidad;
+
+    public Inventario() {
+    }
 
     public Inventario(Usuario idUsuario, Producto idProducto, int cantidadMinima, int cantidad, Date fechaCaducidad) {
         this.idUsuario = idUsuario;

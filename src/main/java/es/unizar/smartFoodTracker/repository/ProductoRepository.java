@@ -1,7 +1,8 @@
 package es.unizar.smartFoodTracker.repository;
 
-/**
- * Created by carlos on 19/03/17.
- */
-public class ProductoRepository {
+import es.unizar.smartFoodTracker.model.Producto;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
 }

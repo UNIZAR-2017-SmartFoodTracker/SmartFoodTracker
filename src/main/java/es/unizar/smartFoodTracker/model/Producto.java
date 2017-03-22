@@ -13,6 +13,9 @@ public class Producto {
     private Long idProducto;
     private String nombre;
 
+    public Producto() {
+    }
+
     public Producto(String nombre) {
         this.nombre = nombre;
     }

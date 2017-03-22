@@ -1,31 +1,19 @@
 package es.unizar.smartFoodTracker.model;
 
-import javax.persistence.*;
-
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by carlos on 16/03/17.
+ * Created by carlos on 19/03/17.
  */
-@Entity (name = "peso")
-@IdClass(PesoID.class)
-public class Peso {
+public class PesoID implements Serializable {
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "idUsuario")
     private Usuario idUsuario;
-    private double peso;
-    @Id
     private Date fecha;
 
-    public Peso() {
-    }
-
-    public Peso(Usuario idUsuario, double peso, Date fecha) {
+    public PesoID(Usuario idUsuario, Date fecha) {
         this.idUsuario = idUsuario;
-        this.peso = peso;
         this.fecha = fecha;
     }
 
@@ -35,14 +23,6 @@ public class Peso {
 
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
     }
 
     public Date getFecha() {

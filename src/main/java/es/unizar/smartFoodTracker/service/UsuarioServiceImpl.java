@@ -3,6 +3,7 @@ package es.unizar.smartFoodTracker.service;
 import es.unizar.smartFoodTracker.model.Usuario;
 import es.unizar.smartFoodTracker.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +14,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    protected JdbcTemplate jdbc;
 
     @Override
     public Usuario findByUsername(String username) {
