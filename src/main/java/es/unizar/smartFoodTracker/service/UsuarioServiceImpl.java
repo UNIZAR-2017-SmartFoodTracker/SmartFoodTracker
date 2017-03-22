@@ -15,12 +15,14 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    protected JdbcTemplate jdbc;
-
     @Override
     public Usuario findByUsername(String username) {
         return usuarioRepository.findByUsername(username);
+    }
+
+    @Override
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
     }
 
     @Override
