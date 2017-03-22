@@ -18,3 +18,7 @@
   3.2. node.
   3.3. src/main/resources/static/bower_components.
 4. Para limpiar el proyecto en la carpeta de salida, ejecutar la operación de maven "clean".
+5. Una vez instaladas las dependencias se debe crear una base de datos de nombre 'food', además de un usuario "food" con contraseña "food" y permisos:
+    1. `CREATE DATABASE food;`
+    1. `CREATE USER 'food'@localhost' IDENTIFIED BY 'food';`
+    1. `GRANT ALL PRIVILEGES * . * TO 'food'@'localhost';`
