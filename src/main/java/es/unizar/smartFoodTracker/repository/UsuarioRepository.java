@@ -10,8 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-
-
+    Usuario findByEmail(String email);
     Usuario findByUsername (String username);
 
 }

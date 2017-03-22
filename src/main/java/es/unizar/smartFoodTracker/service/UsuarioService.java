@@ -10,4 +10,5 @@ public interface UsuarioService  {
 
     void save (Usuario usuario);
     Usuario findByUsername(String username);
+    Usuario findByEmail(String email);
 }

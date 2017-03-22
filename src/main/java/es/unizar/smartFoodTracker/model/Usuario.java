@@ -85,4 +85,14 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                '}';
+    }
 }
