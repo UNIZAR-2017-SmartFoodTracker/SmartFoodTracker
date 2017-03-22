@@ -3,8 +3,8 @@ services:
 - mysql
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS food;'
-  - mysql -e 'CREATE USER food@localhost IDENTIFIED BY food;'
-  - mysql -e 'GRANT ALL PRIVILEGES * . * TO food@localhost;'
+  - mysql -e 'CREATE USER "food"@"localhost" IDENTIFIED BY "food";'
+  - mysql -e 'GRANT ALL PRIVILEGES * . * TO "food"@"localhost";'
 jdk:
 - oraclejdk8
 sudo: required
