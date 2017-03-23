@@ -5,6 +5,8 @@
         .module('app', [
             'ngSanitize',
             'ui.router',
+            'ngAnimate',
+            'angular-loading-bar',
             //Ir agregando nuevos modulos aqui cuando se vayan creando
             'app.account',
             'app.home',
@@ -24,8 +26,8 @@
                 })
                 .state('home', {
                     url: '/home',
-                    templateUrl: 'app/account/create/create.html',
-                    controller: 'CreateController as vm'
+                    templateUrl: 'app/account/home/home.html',
+                    controller: 'AccountHomeController'
 
                 });
             //     .state('betan', {

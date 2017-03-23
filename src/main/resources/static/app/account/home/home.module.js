@@ -2,9 +2,8 @@
     'use strict';
 
     angular
-        .module('app.account.create', [
+        .module('app.account.home', [
             'ui.bootstrap',
-            'ngSanitize',
-            'ui.select'
+            'chart.js'
         ]);
 })();

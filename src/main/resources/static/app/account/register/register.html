@@ -5,8 +5,8 @@
 <div class="modal-body" id="modal-body">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="alert alert-danger alert-dismissable" ng-show="vm.registerError">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <div class="alert alert-danger" ng-show="vm.registerError">
+                <a href="#" class="close" aria-label="close" ng-click="vm.toggleRegister()">&times;</a>
                 <strong>¡Error al crear cuenta!</strong> El nombre de usuario y/o correo están ya en uso.
             </div>
         </div>
@@ -14,42 +14,42 @@
             <form class="form" role="form" name="formCrear" ng-submit="vm.register($event)">
                 <div class="form-group">
                     <label>Nombre de usuario:</label>
-                    <input type="text" tabindex="1" class="form-control" placeholder="Nombre de usuario"
+                    <input type="text" class="form-control" placeholder="Nombre de usuario"
                            required="required" ng-model="vm.username"/>
                 </div>
                 <div class="form-group">
                     <label>Email:</label>
-                    <input type="email" tabindex="2" class="form-control" placeholder="Email"
+                    <input type="email" class="form-control" placeholder="Email"
                            required="required" ng-model="vm.email"/>
                 </div>
                 <div class="form-group">
                     <label>Nombre:</label>
-                    <input type="text" tabindex="3" class="form-control" placeholder="Nombre"
+                    <input type="text" class="form-control" placeholder="Nombre"
                            required="required" ng-model="vm.nombre"/>
                 </div>
                 <div class="form-group">
                     <label>Apellidos:</label>
-                    <input type="text" tabindex="4" class="form-control" placeholder="Apellidos"
+                    <input type="text" class="form-control" placeholder="Apellidos"
                            required="required" ng-model="vm.apellidos"/>
                 </div>
                 <div class="form-group">
                     <label>Contraseña:</label>
-                    <input type="password" tabindex="5" class="form-control" placeholder="Contraseña"
+                    <input type="password" class="form-control" placeholder="Contraseña"
                            required="required" ng-model="vm.password"/>
                 </div>
                 <div class="form-group">
                     <label>Recordatorios semanales:</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" tabindex="6" name="aviso" value="true"
+                    <label><input type="radio" name="aviso" value="true"
                                   required="required" ng-model="vm.aviso">Sí</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" tabindex="7" name="aviso" value="false"
+                    <label><input type="radio" name="aviso" value="false"
                                   required="required" ng-model="vm.aviso">No</label>
                 </div>
                 <div>
-                    <input type="submit" tabindex="8" class="form-control btn btn-primary" value="Regístrate"/>
+                    <input type="submit" class="form-control btn btn-primary" value="Regístrate"/>
                 </div>
             </form>
         </div>

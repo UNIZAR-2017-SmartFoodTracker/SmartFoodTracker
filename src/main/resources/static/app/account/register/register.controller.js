@@ -5,9 +5,9 @@
         .module('app.account.register')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$uibModalInstance', '$http'];
+    RegisterController.$inject = ['$uibModalInstance', '$http', 'AlertService'];
 
-    function RegisterController($uibModalInstance, $http) {
+    function RegisterController($uibModalInstance, $http, AlertService) {
         var vm = this;
 
         vm.registerError = false;
@@ -20,6 +20,11 @@
 
         vm.register = register;
         vm.cancel = cancel;
+        vm.toggleRegister = toggleRegister;
+
+        function toggleRegister(){
+            vm.registerError = false;
+        }
 
         function cancel() {
             vm = {
@@ -52,6 +57,8 @@
                 function (response) { //success
                     //console.log("Respuesta: " + response);
                     vm.registerError = false;
+
+                    AlertService.addAlert('success','¡El usuario ' + data.username + ' ha sido registrado con éxito!')
                     $uibModalInstance.dismiss('success');
                 },
                 function (response) { //error
