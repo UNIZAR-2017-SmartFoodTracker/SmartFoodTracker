@@ -16,6 +16,11 @@
         vm.username = null;
         vm.cancel = cancel;
         vm.login = login;
+        vm.toggleLogin = toggleLogin;
+
+        function toggleLogin(){
+            vm.loginError = false;
+        }
 
         function cancel() {
             vm = {
@@ -29,19 +34,10 @@
         function login(event) {
             event.preventDefault();
 
-            var data = {
-                username: vm.username
-            };
-
-            // console.log(vm.username);
-            // console.log(vm.password);
-
             //Comprobar mediante peticion a API RESTful que son correctos los campos
-            $http.get("/api/usuario", data).then(
+            $http.get("/api/usuario/" + vm.username).then(
                 function (response) { //success
-                    //console.log("Respuesta: " + response);
-
-                    var usuario = response.data[0];
+                    var usuario = response.data;
 
                     if(usuario.password == vm.password){
                         //Exito
@@ -54,10 +50,9 @@
                         $uibModalInstance.dismiss('success');
                     } else{
                         //Password incorrecto
+                        //console.log("Password introducida: " + vm.password + ", password valida: " + usuario.password);
                         vm.loginError = true;
                     }
-
-
                 },
                 function (response) { //error
                     vm.loginError = true;

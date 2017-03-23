@@ -5,8 +5,8 @@
 <div class="modal-body" id="modal-body">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="alert alert-danger alert-dismissable" ng-show="vm.loginError">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <div class="alert alert-danger" ng-show="vm.loginError">
+                <a href="#" class="close" aria-label="close" ng-click="vm.toggleLogin()">&times;</a>
                 <strong>¡Error al iniciar sesión!</strong> Por favor comprueba tus credenciales y vuelve a intentarlo.
             </div>
         </div>
