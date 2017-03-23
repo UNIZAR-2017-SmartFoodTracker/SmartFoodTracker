@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by carlos on 19/03/17.
  */
@@ -29,5 +31,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     public void save(Usuario usuario) {
         usuarioRepository.save(usuario);
     }
+
+    @Override
+    public List<Usuario> findAll() { return usuarioRepository.findAll();}
 
 }

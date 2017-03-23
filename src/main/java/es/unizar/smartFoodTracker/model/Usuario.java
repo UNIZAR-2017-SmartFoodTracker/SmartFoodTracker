@@ -89,10 +89,10 @@ public class Usuario {
     @Override
     public String toString() {
         return "{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
+                "\"username\":\"" + username + '\"' +
+                ", \"email\":\"" + email + '\"' +
+                ", \"nombre\":\"" + nombre + '\"' +
+                ", \"apellidos\":\"" + apellidos + '\"' +
                 '}';
     }
 }
