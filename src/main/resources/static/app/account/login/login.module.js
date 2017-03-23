@@ -3,6 +3,7 @@
 
     angular
         .module('app.account.login', [
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'ngStorage'
         ]);
 })();

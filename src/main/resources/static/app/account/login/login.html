@@ -1,25 +1,26 @@
 <div class="modal-header">
     <button type="button" class="close" aria-hidden="true" data-dismiss="modal" ng-click="vm.cancel()">&times;</button>
-    <h4 class="modal-title" >Sign in</h4>
+    <h4 class="modal-title" >Acceso</h4>
 </div>
 <div class="modal-body" id="modal-body">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="alert alert-danger" ng-show="vm.authenticationError" >
-                <strong>Failed to sign in!</strong> Please check your credentials and try again.
+            <div class="alert alert-danger alert-dismissable" ng-show="vm.loginError">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>¡Error al iniciar sesión!</strong> Por favor comprueba tus credenciales y vuelve a intentarlo.
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
             <form class="form" role="form" ng-submit="vm.login($event)">
                 <div class="form-group">
-                    <label for="username" >Login</label>
+                    <label for="username" >Username</label>
                     <input type="text" class="form-control" id="username" placeholder="" ng-model="vm.username">
                 </div>
                 <div class="form-group">
                     <label for="password" >Password</label>
                     <input type="password" class="form-control" id="password" placeholder="" ng-model="vm.password">
                 </div>
-                <button type="submit" class="btn btn-primary" >Sign in</button>
+                <button type="submit" class="btn btn-primary">Acceder</button>
             </form>
         </div>
     </div>

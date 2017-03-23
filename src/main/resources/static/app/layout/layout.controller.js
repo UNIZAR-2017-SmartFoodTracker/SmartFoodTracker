@@ -10,9 +10,7 @@
     function LayoutController() {
         var vm = this;
         vm.navline = {
-            title: 'Campus Manager',
-            text: 'Created by John Papa',
-            link: 'http://twitter.com/john_papa'
+            title: 'Smart Food Tracker'
         };
     }
 })();
