@@ -5,8 +5,8 @@
 <div class="modal-body" id="modal-body">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="alert alert-danger alert-dismissable" ng-show="vm.registerError">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <div class="alert alert-danger" ng-show="vm.registerError">
+                <a href="#" class="close" aria-label="close" ng-click="vm.toggleRegister()">&times;</a>
                 <strong>¡Error al crear cuenta!</strong> El nombre de usuario y/o correo están ya en uso.
             </div>
         </div>

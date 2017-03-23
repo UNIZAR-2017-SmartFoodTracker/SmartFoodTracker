@@ -5,6 +5,7 @@
         .module('app', [
             'ngSanitize',
             'ui.router',
+            'ngAnimate',
             'angular-loading-bar',
             //Ir agregando nuevos modulos aqui cuando se vayan creando
             'app.account',
