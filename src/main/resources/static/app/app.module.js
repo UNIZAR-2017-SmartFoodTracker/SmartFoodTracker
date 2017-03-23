@@ -26,8 +26,8 @@
                 })
                 .state('home', {
                     url: '/home',
-                    templateUrl: 'app/account/create/create.html',
-                    controller: 'CreateController as vm'
+                    templateUrl: 'app/account/home/home.html',
+                    controller: 'AccountHomeController'
 
                 });
             //     .state('betan', {
