@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.logging.Logger;
 
 /**
@@ -20,27 +21,25 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping(value = "/usuario")
+    public @ResponseBody String getAllUsuarios(){
+        return usuarioService.findAll().toString();
+    }
+
     @GetMapping(value = "/usuario/{username:.*}")
-    public String getUsuario (@PathVariable String username) {
+    public @ResponseBody String getUsuario (@PathVariable String username) {
         Usuario test = usuarioService.findByUsername(username);
         if (test == null) return "{}";
         return test.toString();
     }
 
     @PostMapping(value = "/usuario")
-    public ResponseEntity<?> postUsuario (@RequestParam("username") String username,
-                                          @RequestParam("email") String email,
-                                          @RequestParam("nombre") String nombre,
-                                          @RequestParam("apellidos") String apellidos,
-                                          @RequestParam("aviso") boolean aviso,
-                                          @RequestParam("password") String password) {
-        Usuario nuevo = usuarioService.findByEmail(email);
+    public ResponseEntity<?> postUsuario (@RequestBody Usuario usuario) {
+        Usuario nuevo = usuarioService.findByEmail(usuario.getEmail());
         if (nuevo == null) {
-            nuevo = usuarioService.findByUsername(username);
+            nuevo = usuarioService.findByUsername(usuario.getUsername());
             if (nuevo == null) {
-                nuevo = new Usuario(username, email, nombre,
-                        apellidos, aviso, password);
-                usuarioService.save(nuevo);
+                usuarioService.save(usuario);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }
             //Casos en los que el usuario ya existe.
