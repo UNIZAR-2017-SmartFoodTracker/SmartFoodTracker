@@ -93,6 +93,8 @@ public class Usuario {
                 ", \"email\":\"" + email + '\"' +
                 ", \"nombre\":\"" + nombre + '\"' +
                 ", \"apellidos\":\"" + apellidos + '\"' +
+                ", \"password\":\"" + password + '\"' +
+                ", \"aviso\":\"" + aviso + '\"' +
                 '}';
     }
 }

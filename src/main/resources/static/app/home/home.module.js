@@ -3,6 +3,8 @@
 
     angular
         .module('app.home', [
-            'app.layout'
+            'app.layout',
+            'ui.bootstrap',
+            'ngSanitize'
         ]);
 })();

@@ -1,10 +1,22 @@
-<div>
-    <div class="page-header">
-        <h1>{{vm.home.title}}
-            <small>{{vm.home.subtitle}}</small>
-        </h1>
-    </div>
+<div ng-controller="HomeController">
+    <style>
+        .alert-fade.ng-enter {
+            transition: 0.5s linear all;
+            opacity: 0;
+        }
+        .alert-fade.ng-enter.ng-enter-active {
+            opacity: 1;
+        }
+        .alert-fade.ng-leave {
+            transition: 0.5s linear all;
+            opacity: 1;
+        }
+        .alert-fade.ng-leave.ng-leave-active {
+            opacity: 0;
+        }
+    </style>
+    <div uib-alert dismiss-on-timeout="5000" ng-repeat="alert in alerts"
+         ng-class="'alert-' + (alert.type || 'warning') + ' alert-fade'" close="alert.close()">{{alert.msg}}</div>
     <ui-view>
-
     </ui-view>
 </div>

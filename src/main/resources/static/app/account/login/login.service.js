@@ -1,15 +1,22 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('app.account.login')
         .factory('LoginService', LoginService);
 
-    LoginService.$inject = ['$uibModal'];
+    LoginService.$inject = ['$uibModal','$localStorage','$sessionStorage'];
 
-    function LoginService ($uibModal) {
+    function LoginService($uibModal, $scope, $localStorage, $sessionStorage) {
+        var vm = this;
+        //Objeto para guardar lo relacionado con la sesion
+        vm.session = $localStorage;
+
         var service = {
-            open: open
+            open: open,
+            login: login,
+            logout: logout,
+            isLogged: isLogged
         };
 
         var modalInstance = null;
@@ -19,7 +26,7 @@
 
         return service;
 
-        function open () {
+        function open() {
             if (modalInstance !== null) return;
             modalInstance = $uibModal.open({
                 animation: true,
@@ -31,6 +38,20 @@
                 resetModal,
                 resetModal
             );
+        }
+
+        function login(usuario){
+            vm.session.logged = {
+                usuario: usuario
+            };
+        }
+
+        function logout() {
+            delete $localStorage.logged;
+        }
+
+        function isLogged(){
+            return vm.session.logged != undefined;
         }
     }
 })();
