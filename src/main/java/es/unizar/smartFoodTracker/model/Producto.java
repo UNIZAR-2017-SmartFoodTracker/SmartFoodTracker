@@ -10,6 +10,7 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_producto")
     private Long idProducto;
     private String nombre;
 

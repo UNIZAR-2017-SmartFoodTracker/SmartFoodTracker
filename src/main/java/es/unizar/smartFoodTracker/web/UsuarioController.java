@@ -29,7 +29,11 @@ public class UsuarioController {
     @GetMapping(value = "/usuario/{username:.*}")
     public @ResponseBody String getUsuario (@PathVariable String username) {
         Usuario test = usuarioService.findByUsername(username);
-        if (test == null) return "{}";
+        if (test == null) {
+            log.info("El usuario " + username + " no existe en la aplicacion");
+            return "{}";
+        }
+        log.info("Usuario " + username + " encontrado correctamente");
         return test.toString();
     }
 
@@ -40,14 +44,17 @@ public class UsuarioController {
             nuevo = usuarioService.findByUsername(usuario.getUsername());
             if (nuevo == null) {
                 usuarioService.save(usuario);
+                log.info("Usuario " + usuario.getUsername() + "registrado correctamente");
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }
             //Casos en los que el usuario ya existe.
             else{
+                log.info("Error en el registro de " + usuario.getUsername());
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
         else{
+            log.info("Error en el registro de " + usuario.getUsername());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

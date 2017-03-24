@@ -1,6 +1,5 @@
 package es.unizar.smartFoodTracker.model;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,27 +8,10 @@ import java.util.Date;
  */
 public class PesoID implements Serializable {
 
-    private Usuario idUsuario;
+    private Long usuario;
     private Date fecha;
 
-    public PesoID(Usuario idUsuario, Date fecha) {
-        this.idUsuario = idUsuario;
-        this.fecha = fecha;
+    public PesoID() {
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
 }
