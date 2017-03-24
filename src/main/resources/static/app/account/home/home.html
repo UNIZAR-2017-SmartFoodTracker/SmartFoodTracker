@@ -1,12 +1,38 @@
+<style>
+    .row{
+        margin-bottom:20px;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <h1>
                 Historial de su peso
             </h1>
-            <br/>
-            <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-click="onClick"></canvas>
-
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <canvas class="chart chart-line" chart-data="vm.data" chart-labels="vm.labels"
+                            chart-click="vm.onClick" chart-options="vm.chartOptions"></canvas>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form class="form" role="form" ng-submit="vm.addPeso($event)">
+                        <div class="form-group">
+                            <label>Añadir un nuevo peso al historial (kilos):</label>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="number" class="form-control" placeholder="Introducir peso"
+                                           min="1" required="required" step="any" ng-model="vm.peso"/>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <input type="submit" class="form-control btn btn-primary" value="Añadir peso"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <h1>
