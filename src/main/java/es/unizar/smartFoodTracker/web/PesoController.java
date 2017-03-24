@@ -14,9 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- * Created by carlos on 23/03/17.
- */
 @Controller
 @RequestMapping("/api")
 public class PesoController {
@@ -43,7 +40,7 @@ public class PesoController {
         return pesoService.getPesos(usuario);
     }
 
-    @PostMapping("/peso/{username:.*}")
+    @PostMapping("/peso")
     public ResponseEntity<?> postPeso(@RequestBody UsuarioPeso usuarioPeso){
         Usuario usuario = usuarioService.findByUsername(usuarioPeso.getUsername());
         if (usuario == null) {
