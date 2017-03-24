@@ -14,13 +14,13 @@ public class Inventario {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario idUsuario;
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "idProducto")
-    private Producto idProducto;
+    @JoinColumn(name = "id_producto")
+    private Producto producto;
 
     private int cantidadMinima;
     private int cantidad;
@@ -29,28 +29,28 @@ public class Inventario {
     public Inventario() {
     }
 
-    public Inventario(Usuario idUsuario, Producto idProducto, int cantidadMinima, int cantidad, Date fechaCaducidad) {
-        this.idUsuario = idUsuario;
-        this.idProducto = idProducto;
+    public Inventario(Usuario usuario, Producto producto, int cantidadMinima, int cantidad, Date fechaCaducidad) {
+        this.usuario = usuario;
+        this.producto = producto;
         this.cantidadMinima = cantidadMinima;
         this.cantidad = cantidad;
         this.fechaCaducidad = fechaCaducidad;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Producto getIdProducto() {
-        return idProducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setIdProducto(Producto idProducto) {
-        this.idProducto = idProducto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public int getCantidadMinima() {
