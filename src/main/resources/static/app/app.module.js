@@ -27,7 +27,7 @@
                 .state('home', {
                     url: '/home',
                     templateUrl: 'app/account/home/home.html',
-                    controller: 'AccountHomeController'
+                    controller: 'AccountHomeController as vm'
 
                 });
             //     .state('betan', {
