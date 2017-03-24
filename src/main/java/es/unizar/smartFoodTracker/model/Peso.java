@@ -1,8 +1,8 @@
 package es.unizar.smartFoodTracker.model;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,27 +14,28 @@ public class Peso {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario idUsuario;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    private Usuario usuario;
     private double peso;
+
     @Id
     private Date fecha;
 
     public Peso() {
     }
 
-    public Peso(Usuario idUsuario, double peso, Date fecha) {
-        this.idUsuario = idUsuario;
+    public Peso(Usuario usuario, double peso, Date fecha) {
+        this.usuario = usuario;
         this.peso = peso;
         this.fecha = fecha;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public double getPeso() {
@@ -47,6 +48,11 @@ public class Peso {
 
     public Date getFecha() {
         return fecha;
+    }
+
+    public String fechaToString(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(fecha);
     }
 
     public void setFecha(Date fecha) {
