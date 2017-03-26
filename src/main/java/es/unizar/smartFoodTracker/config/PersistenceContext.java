@@ -1,6 +1,8 @@
 package es.unizar.smartFoodTracker.config;
 
+import es.unizar.smartFoodTracker.service.InventarioServiceImpl;
 import es.unizar.smartFoodTracker.service.PesoServiceImpl;
+import es.unizar.smartFoodTracker.service.ProductoServiceImpl;
 import es.unizar.smartFoodTracker.service.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +35,12 @@ public class PersistenceContext {
     PesoServiceImpl pesoService(){
         return new PesoServiceImpl();
     }
+
+    @Bean
+    ProductoServiceImpl productoService(){ return new ProductoServiceImpl(); }
+
+    @Bean
+    InventarioServiceImpl inventarioService(){ return new InventarioServiceImpl(); }
 
     @Bean
     SimpleMailMessage templateMessage(){
