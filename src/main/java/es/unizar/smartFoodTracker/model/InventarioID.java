@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class InventarioID implements Serializable{
     private Long usuario;
-    private Producto producto;
+    private Long producto;
 
 
     public InventarioID() {
