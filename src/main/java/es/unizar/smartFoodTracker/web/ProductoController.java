@@ -31,8 +31,11 @@ public class ProductoController {
 
     //Comprobar si existe o no un producto.
     @GetMapping(value = "/producto/{nombre:.*}")
-    public @ResponseBody Producto getProductos(@PathVariable String nombre){
-        return productoService.findByNombre(nombre);
+    public @ResponseBody String getProductos(@PathVariable String nombre){
+        if (productoService.findByNombre(nombre) == null){
+            return "{}";
+        }
+        return productoService.findByNombre(nombre).toString();
     }
 
     @PostMapping(value = "/producto")
