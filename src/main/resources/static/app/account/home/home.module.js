@@ -4,6 +4,7 @@
     angular
         .module('app.account.home', [
             'ui.bootstrap',
-            'chart.js'
+            'chart.js',
+            'ngTable'
         ]);
 })();
