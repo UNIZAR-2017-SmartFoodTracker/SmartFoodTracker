@@ -2,14 +2,24 @@
     .row{
         margin-bottom:20px;
     }
+    h1{
+        margin-bottom:20px;
+    }
 </style>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-switch on="vm.data[0].length == 0">
             <h1>
                 Historial de su peso
             </h1>
-            <div class="row">
+            <div class="row" ng-switch-when="true">
+                <div class="jumbotron">
+                    <div class="container text-center">
+                        <p>¡Uy! Parece ser que no existen registros de su peso en el sistema</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-switch-when="false">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <canvas class="chart chart-line" chart-data="vm.data" chart-labels="vm.labels"
                             chart-click="vm.onClick" chart-options="vm.chartOptions"></canvas>
@@ -23,7 +33,7 @@
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <input type="number" class="form-control" placeholder="Introducir peso"
-                                           min="1" required="required" step="any" ng-model="vm.peso"/>
+                                           min="30" required="required" step="any" ng-model="vm.peso"/>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <input type="submit" class="form-control btn btn-primary" value="Añadir peso"/>
@@ -34,12 +44,31 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-switch on="vm.products.length == 0">
             <h1>
                 Resumen de su inventario
             </h1>
-            <br/>
-            
+            <div class="row" ng-switch-when="true">
+                <div class="jumbotron">
+                    <div class="container text-center">
+                        <p>¡Uy! Parece ser que no existen productos en el inventario</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-switch-when="false">
+                <table ng-table="vm.inventario" class="table table-bordered">
+                    <tr ng-repeat="row in $data">
+                        <td data-title="'Nombre'"  sortable="'nombreProducto'"
+                            filter="{nombreProducto: 'text'}">{{row.nombreProducto}} </td>
+                        <td data-title="'Cantidad'" sortable="'cantidad'"
+                            filter="{cantidad: 'number'}">{{row.cantidad}}</td>
+                        <td data-title="'Mínimo'" sortable="'cantidadMinima'"
+                            filter="{cantidadMinima: 'number'}">{{row.cantidadMinima}}</td>
+                        <td data-title="'Caducidad'" sortable="'fechaCaducidad'"
+                            filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
