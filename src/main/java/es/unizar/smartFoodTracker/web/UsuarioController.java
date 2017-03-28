@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -22,8 +23,8 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping(value = "/usuario")
-    public @ResponseBody String getAllUsuarios(){
-        return usuarioService.findAll().toString();
+    public @ResponseBody List<Usuario> getAllUsuarios(){
+        return usuarioService.findAll();
     }
 
     @GetMapping(value = "/usuario/{username:.*}")

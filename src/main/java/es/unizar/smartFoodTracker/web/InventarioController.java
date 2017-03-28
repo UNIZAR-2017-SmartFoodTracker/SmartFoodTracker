@@ -48,19 +48,12 @@ public class InventarioController {
     }
 
     @GetMapping(value = "/inventario/{username:.*}")
-    public @ResponseBody List<Producto> getProductos (@PathVariable String username) {
+    public @ResponseBody List<Inventario> getProductos (@PathVariable String username) {
         Usuario usuario = usuarioService.findByUsername(username);
-        List<Producto> productos = new ArrayList<>();
         if (usuario == null) {
             log.info("Usuario + " + username + " no encontrado");
         }
-        else{
-            List<Inventario> list = inventarioService.findByUsuario(usuario);
-            for (Inventario i: list) {
-                productos.add(i.getProducto());
-            }
-        }
-        return productos;
+        return inventarioService.findByUsuario(usuario);
     }
 
     @PostMapping(value = "/inventario")
