@@ -33,7 +33,7 @@ public class EmailService {
         sender.setMailSender(mailSender);
     }
 
-    @Scheduled(fixedDelay = 604800000)     //Comprobación cada 1 semana (604800000 ms)
+//    @Scheduled(fixedDelay = 604800000)     //Comprobación cada 1 semana (604800000 ms)
     public void check() {
         log.info("Comprobando aviso peso.");
         List<Usuario> usuarios = usuarioService.findAll();
