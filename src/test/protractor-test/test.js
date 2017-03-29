@@ -1,3 +1,4 @@
+//Añadir integración con travis
 describe('test protractor', function() {
     it('introducir pesos manualmente', function() {
         browser.get('http://localhost:8080/');
