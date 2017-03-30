@@ -57,7 +57,7 @@
             </div>
             <div class="row" ng-switch-when="false">
                 <table ng-table="vm.inventario" class="table table-bordered">
-                    <tr ng-repeat="row in $data">
+                    <tr ng-repeat="row in $data" ng-form="rowForm" style="text-align: center">
                         <td data-title="'Nombre'"  sortable="'nombreProducto'"
                             filter="{nombreProducto: 'text'}">{{row.nombreProducto}} </td>
                         <td data-title="'Cantidad'" sortable="'cantidad'"
@@ -65,7 +65,7 @@
                         <td data-title="'Mínimo'" sortable="'cantidadMinima'"
                             filter="{cantidadMinima: 'number'}">{{row.cantidadMinima}}</td>
                         <td data-title="'Caducidad'" sortable="'fechaCaducidad'"
-                            filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad}}</td>
+                            filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad | date:'dd/MM/yyyy'}}</td>
                     </tr>
                 </table>
             </div>

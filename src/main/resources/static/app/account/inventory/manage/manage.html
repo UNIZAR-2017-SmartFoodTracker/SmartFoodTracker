@@ -1,0 +1,86 @@
+<style>
+    .row {
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8" ng-switch
+             on="vm.products.length == 0">
+            <h1>
+                Gestión de su inventario
+            </h1>
+            <div class="row" ng-switch-when="true">
+                <div class="jumbotron">
+                    <div class="container text-center">
+                        <p>¡Uy! Parece ser que no existen productos en el inventario</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-switch-when="false">
+                <table ng-table="vm.inventario" class="table table-bordered">
+                    <tr ng-repeat="row in $data" ng-form="rowForm" style="text-align: center">
+                        <td data-title="'Nombre'" sortable="'nombreProducto'"
+                            filter="{nombreProducto: 'text'}">{{row.nombreProducto}}
+                        </td>
+                        <td title="'Cantidad'" filter="{cantidad: 'number'}" sortable="'cantidad'"
+                            ng-switch="row.isEditing" ng-class="cantidad.$dirty ? 'bg-warning' : ''"
+                            ng-form="cantidad">
+                            <span ng-switch-default class="editable-text">{{row.cantidad}}</span>
+                            <div class="controls" ng-class="cantidad.$invalid && cantidad.$dirty ?
+                            'has-error' : ''" ng-switch-when="true">
+                                <input type="number" name="cantidad" ng-model="row.cantidad"
+                                       class="editable-input form-control input-sm" required/>
+                            </div>
+                        </td>
+                        <td title="'Mínimo'" filter="{cantidadMinima: 'number'}" sortable="'cantidadMinima'"
+                            ng-switch="row.isEditing" ng-class="cantidadMinima.$dirty ? 'bg-warning' : ''"
+                            ng-form="cantidadMinima">
+                            <span ng-switch-default class="editable-text">{{row.cantidadMinima}}</span>
+                            <div class="controls" ng-class="cantidadMinima.$invalid && cantidadMinima.$dirty ?
+                            'has-error' : ''" ng-switch-when="true">
+                                <input type="number" name="cantidadMinima" ng-model="row.cantidadMinima"
+                                       class="editable-input form-control input-sm" required/>
+                            </div>
+                        </td>
+                        <td title="'Caducidad'" filter="{fechaCaducidad: 'text'}" sortable="'fechaCaducidad'"
+                            ng-switch="row.isEditing" ng-class="fechaCaducidad.$dirty ? 'bg-warning' : ''"
+                            ng-form="fechaCaducidad">
+                            <span ng-switch-default class="editable-text">{{row.fechaCaducidad | date:'dd/MM/yyyy'}}</span>
+                            <div class="controls" ng-class="fechaCaducidad.$invalid && fechaCaducidad.$dirty ?
+                            'has-error' : ''" ng-switch-when="true">
+                                <md-datepicker name="fechaCaducidad" ng-model="row.fechaCaducidad"
+                                               md-placeholder="Nueva fecha de caducidad"
+                                               class="editable-input form-contorl input-sm" required md-open-on-focus>
+                                </md-datepicker>
+                                <!--<input type="text" name="fechaCaducidad" ng-model="row.fechaCaducidad"-->
+                                       <!--class="editable-input form-control input-sm" required/>-->
+                            </div>
+                        </td>
+                        <td style="white-space:nowrap;">
+                            <button class="btn btn-primary btn-sm" ng-click="vm.save(row, rowForm)"
+                                    ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                            <button class="btn btn-default btn-sm" ng-click="vm.cancel(row, rowForm)"
+                                    ng-if="row.isEditing">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <button class="btn btn-default btn-sm" ng-click="row.isEditing = true"
+                                    ng-if="!row.isEditing">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button class="btn btn-danger btn-sm" ng-click="vm.del(row)" ng-if="!row.isEditing">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

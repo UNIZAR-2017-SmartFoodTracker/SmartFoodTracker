@@ -29,6 +29,12 @@
                     templateUrl: 'app/account/home/home.html',
                     controller: 'AccountHomeController as vm'
 
+                })
+                .state('gestionInventario', {
+                    url: '/inventory',
+                    templateUrl: 'app/account/inventory/manage/manage.html',
+                    controller: 'ManageInventoryController as vm'
+
                 });
             //     .state('betan', {
             //         url: '/betan',
