@@ -10,6 +10,7 @@ import es.unizar.smartFoodTracker.repository.UsuarioRepository;
 import es.unizar.smartFoodTracker.service.InventarioService;
 import es.unizar.smartFoodTracker.service.ProductoService;
 import es.unizar.smartFoodTracker.service.UsuarioService;
+import es.unizar.smartFoodTracker.service.mailService.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping(value = "/api")
 public class InventarioController {
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -111,6 +114,9 @@ public class InventarioController {
                     i.setCantidadMinima(productoInventario.getCantidadMinima());
                     i.setFechaCaducidad(date);
                     inventarioService.save(i);
+//                    if (i.getCantidad() < i.getCantidadMinima()) {
+//                        emailService.faltaCantidad(i); // Envia mensaje
+//                    }
                     log.info("Producto " + producto.getNombre() + " actualizado en el inventario de " + usuario.getUsername());
                     return new ResponseEntity<>(HttpStatus.OK);
                 }
