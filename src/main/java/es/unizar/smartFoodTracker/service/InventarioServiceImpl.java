@@ -23,6 +23,11 @@ public class InventarioServiceImpl implements InventarioService {
     }
 
     @Override
+    public Inventario findByUsuarioProducto(Usuario usuario, Producto producto) {
+        return inventarioRepository.findByUsuarioAndProducto(usuario, producto);
+    }
+
+    @Override
     public void save(Inventario inventario) {
         inventarioRepository.save(inventario);
     }
@@ -32,5 +37,9 @@ public class InventarioServiceImpl implements InventarioService {
         return inventarioRepository.findAll();
     }
 
+    @Override
+    public void delete(Inventario i) {
+        inventarioRepository.delete(i);
+    }
 
 }

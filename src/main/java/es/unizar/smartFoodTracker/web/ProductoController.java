@@ -31,7 +31,7 @@ public class ProductoController {
 
     //Comprobar si existe o no un producto.
     @GetMapping(value = "/producto/{nombre:.*}")
-    public @ResponseBody String getProductos(@PathVariable String nombre){
+    public @ResponseBody String getProducto(@PathVariable String nombre){
         if (productoService.findByNombre(nombre) == null){
             return "{}";
         }
@@ -40,13 +40,16 @@ public class ProductoController {
 
     @PostMapping(value = "/producto")
     public ResponseEntity<?> postProducto (@RequestBody Producto producto){
-        if (productoService.findByNombre(producto.getNombre()) == null) {
+        Producto test = productoService.findByNombre(producto.getNombre());
+        if (test == null) {
             productoService.save(producto);
             log.info("Se ha guardado un producto con nombre: " + producto.getNombre());
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
-        log.info("El producto " + producto.getNombre() + " ya existe.");
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        else{
+            log.info("El producto " + producto.getNombre() + " ya existe.");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
