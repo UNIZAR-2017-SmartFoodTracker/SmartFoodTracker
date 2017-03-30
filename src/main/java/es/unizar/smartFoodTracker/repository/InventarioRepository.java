@@ -13,4 +13,8 @@ import java.util.List;
 public interface InventarioRepository extends JpaRepository<Inventario, Long> {
 
     List<Inventario> findByUsuario(Usuario usuario);
+
+    Inventario findByUsuarioAndProducto(Usuario usuario, Producto producto);
+
+    void delete(Inventario inventario);
 }
