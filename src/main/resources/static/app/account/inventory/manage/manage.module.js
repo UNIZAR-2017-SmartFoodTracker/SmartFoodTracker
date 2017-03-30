@@ -5,7 +5,8 @@
         .module('app.account.inventory.manage', [
             'ui.bootstrap',
             'ngMaterial',
-            'ngTable'
+            'ngTable',
+            'ui.select'
         ])
         .config(function($mdDateLocaleProvider) {
             $mdDateLocaleProvider.formatDate = function(date) {

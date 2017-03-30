@@ -20,6 +20,36 @@
 
         vm.products = [];
         var originalData = [];
+        var availableOptions = [];
+
+        //Obtenemos productos
+        $http.get("/api/producto").then(
+            function (response) { //success
+                var objetoProducto = response.data;
+
+                for (var i = 0; i < objetoProducto.length; i++) {
+                    var idProducto = objetoProducto[i].idProducto;
+                    var nombreProducto = objetoProducto[i].nombre;
+
+                    vm.availableOptions.push({
+                        value: idProducto, name: nombreProducto
+                    });
+                }
+            },
+            function (response) { //error
+                AlertService.addAlert('danger', 'Error al obtener los productos del sistema');
+            }
+        );
+
+        vm.cantidad = null;
+        vm.cantidadMinima = null;
+        vm.fechaCaducidad = new Date();
+        vm.availableOptions = availableOptions;
+        $scope.selected = {};
+        vm.cancel = cancel;
+        vm.del = del;
+        vm.save = save;
+        vm.addProducto = addProducto;
 
         //Obtenemos inventario
         $http.get("/api/inventario/" + usuario.username).then(
@@ -32,7 +62,6 @@
                     var cantidad = objetoInventario[i].cantidad;
                     var cantidadMinima = objetoInventario[i].cantidadMinima;
                     var fechaCaducidad = new Date(objetoInventario[i].fechaCaducidad);
-                    var fechaParseada = $filter('date')(fechaCaducidad, "dd/MM/yyyy");
 
                     vm.products.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
@@ -50,9 +79,55 @@
             }
         );
 
-        vm.cancel = cancel;
-        vm.del = del;
-        vm.save = save;
+        function addProducto(event){
+            event.preventDefault();
+
+            if($scope.selected.value === undefined){
+            } else{
+                var data = {
+                    nombreUsuario: usuario.username,
+                    nombreProducto: $scope.selected.value.name,
+                    fechaCaducidad: ($filter('date')(vm.fechaCaducidad,"dd/MM/yyyy")),
+                    cantidad: vm.cantidad,
+                    cantidadMinima: vm.cantidadMinima
+                };
+
+                //console.log(data);
+
+                $http.post("/api/inventario", data).then(
+                    function (response) { //success
+                        //console.log("Respuesta: " + response);
+
+                        vm.products.push({
+                            nombreProducto: data.nombreProducto,
+                            fechaCaducidad: vm.fechaCaducidad,
+                            cantidad: data.cantidad,
+                            cantidadMinima: data.cantidadMinima
+                        });
+
+                        originalData.push({
+                            nombreProducto: data.nombreProducto,
+                            fechaCaducidad: vm.fechaCaducidad,
+                            cantidad: data.cantidad,
+                            cantidadMinima: data.cantidadMinima
+                        });
+
+                        AlertService.addAlert('success','¡El producto ' + data.nombreProducto + ' ha sido añadido con éxito!');
+
+                        vm.cantidad = null;
+                        vm.cantidadMinima = null;
+                        vm.fechaCaducidad = new Date();
+                        vm.availableOptions = availableOptions;
+                        $scope.selected = {};
+
+                        vm.inventario.reload();
+                    },
+                    function (response) { //error
+                        AlertService.addAlert('danger','Error: El producto ' + data.nombreProducto + ' no se ha podido añadir al inventario');
+                    }
+                );
+            }
+        }
 
         function cancel(row, rowForm) {
             var originalRow = resetRow(row, rowForm);
@@ -62,54 +137,95 @@
         function del(row) {
             //Peticion API Delete
 
+            var data = {
+                nombreUsuario: usuario.username,
+                nombreProducto: row.nombreProducto,
+                fechaCaducidad: ($filter('date')(row.fechaCaducidad,"dd/MM/yyyy")),
+                cantidad: row.cantidad,
+                cantidadMinima: row.cantidadMinima
+            };
 
+            //console.log(data);
 
-            vm.products.splice(row.id,1);
-            vm.inventario.reload();
+            //Esto va por magia
+            $http({
+                method: 'DELETE',
+                url: '/api/inventario',
+                data: {
+                    nombreUsuario: usuario.username,
+                    nombreProducto: row.nombreProducto
+                },
+                headers: {'Content-type': 'application/json;charset=utf-8'}}).then(
+                function(response) {
+                    //console.log("Exito " + response.data);
+
+                    var rowId = vm.products.indexOf(row);
+                    //console.log(rowId);
+
+                    vm.products.splice(rowId,1);
+                    originalData.splice(rowId,1);
+                    vm.inventario.reload();
+
+                    AlertService.addAlert('success','¡Producto ' + data.nombreProducto + ' borrado con éxito!');
+                }, function(rejection) {
+                    //console.log("Fracaso " + rejection.data);
+                    AlertService.addAlert('danger','Error al eliminar el producto ' + data.nombreProducto);
+                });
+
+            //Esto no va, por magia
+            // $http.delete("/api/inventario", data).then(
+            //     function (response) { //success
+            //         console.log("Response: " + response.data);
+            //
+            //         vm.products.splice(row.id,1);
+            //         originalData.splice(row.id,1);
+            //         vm.inventario.reload();
+            //
+            //         AlertService.addAlert('success','¡Producto ' + data.nombreProducto + ' borrado con éxito!');
+            //     },
+            //     function (response) { //error
+            //         console.log("Response: " + response.data);
+            //         AlertService.addAlert('danger','Error al eliminar el producto ' + data.nombreProducto);
+            //     }
+            // );
         }
 
         function resetRow(row, rowForm) {
             row.isEditing = false;
             rowForm.$setPristine();
-            //vm.tableTracker.untrack(row);
             for (var i in originalData) {
                 if (originalData[i].id === row.id) {
                     return originalData[i]
                 }
             }
-            // return _.findWhere(originalData, function(r){
-            //     return r.id === row.id;
-            // });
         }
 
         function save(row, rowForm) {
             var originalRow = resetRow(row, rowForm);
-            console.log("Saving row " + row.nombreProducto + " with old value " + originalRow.nombreProducto);
+            //console.log("Saving row " + row.nombreProducto + " with old value " + originalRow.nombreProducto);
 
             var data = {
                 nombreUsuario: usuario.username,
                 nombreProducto: row.nombreProducto,
-                fechaCaducidad: row.fechaCaducidad,
+                fechaCaducidad: ($filter('date')(row.fechaCaducidad,"dd/MM/yyyy")),
                 cantidad: row.cantidad,
                 cantidadMinima: row.cantidadMinima
             };
 
-            console.log(data);
+            //console.log(data);
 
-            // $http.post("/api/usuario", data).then(
-            //     function (response) { //success
-            //         //console.log("Respuesta: " + response);
-            //         vm.registerError = false;
-            //
-            //         AlertService.addAlert('success','¡El usuario ' + data.username + ' ha sido registrado con éxito!')
-            //         $uibModalInstance.dismiss('success');
-            //     },
-            //     function (response) { //error
-            //         vm.registerError = true;
-            //     }
-            // );
+            $http.put("/api/inventario", data).then(
+                function (response) { //success
+                    //console.log("Respuesta: " + response);
 
-            angular.extend(originalRow, row);
+                    angular.extend(originalRow, row);
+
+                    AlertService.addAlert('success','¡Producto ' + data.nombreProducto + ' actualizado con éxito!');
+                },
+                function (response) { //error
+                    AlertService.addAlert('danger','Error al actualizar el producto ' + data.nombreProducto);
+                }
+            );
         }
 
         //Creacion tabla inventario

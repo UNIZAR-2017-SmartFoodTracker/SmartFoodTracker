@@ -3,7 +3,7 @@
         margin-bottom: 20px;
     }
 
-    h1 {
+    h1,h2 {
         margin-bottom: 20px;
     }
 </style>
@@ -11,10 +11,10 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8" ng-switch
              on="vm.products.length == 0">
-            <h1>
-                Gestión de su inventario
-            </h1>
             <div class="row" ng-switch-when="true">
+                <h1>
+                    Gestión de su inventario
+                </h1>
                 <div class="jumbotron">
                     <div class="container text-center">
                         <p>¡Uy! Parece ser que no existen productos en el inventario</p>
@@ -22,6 +22,9 @@
                 </div>
             </div>
             <div class="row" ng-switch-when="false">
+                <h1>
+                    Gestión de su inventario
+                </h1>
                 <table ng-table="vm.inventario" class="table table-bordered">
                     <tr ng-repeat="row in $data" ng-form="rowForm" style="text-align: center">
                         <td data-title="'Nombre'" sortable="'nombreProducto'"
@@ -80,6 +83,59 @@
                         </td>
                     </tr>
                 </table>
+            </div>
+            <div class="row">
+                <h2>Añadir un nuevo producto al inventario:</h2>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form class="form" role="form" ng-submit="vm.addProducto($event)">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <label>Nombre:</label>
+                                    <!--<input type="text" name="nombreProducto" ng-model="vm.nombreProducto"-->
+                                           <!--placeholder="Introducir nombre" class="form-control" required/>-->
+                                    <ui-select ng-model="selected.value" theme="bootstrap" tabindex="3">
+                                        <ui-select-match placeholder="Selecciona un producto de la lista...">
+                                            {{$select.selected.name}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                                repeat="option in (vm.availableOptions | filter: $select.search) track by option.value">
+                                            <div ng-bind-html="option.value | highlight: $select.search" ></div>
+                                            <small ng-bind-html="option.name | highlight: $select.search"></small>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <label>Fecha de caducidad:</label>
+                                    <br/>
+                                    <md-datepicker name="fechaCaducidad" ng-model="vm.fechaCaducidad"
+                                                   md-placeholder="Introducir fecha de caducidad"
+                                                   required md-open-on-focus>
+                                    </md-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <label>Cantidad:</label>
+                                    <input type="number" name="cantidad" ng-model="vm.cantidad"
+                                           placeholder="Introducir cantidad" class="form-control" min="1" required/>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <label>Cantidad mínima:</label>
+                                    <input type="number" name="cantidadMinima" ng-model="vm.cantidadMinima"
+                                           placeholder="Introducir cantidad mínima" class="form-control" min="1" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-offset-3 col-xs-6 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+                                <input type="submit" class="form-control btn btn-primary" value="Añadir producto"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
