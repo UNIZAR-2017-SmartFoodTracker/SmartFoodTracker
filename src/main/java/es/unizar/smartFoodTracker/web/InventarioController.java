@@ -4,9 +4,6 @@ import es.unizar.smartFoodTracker.model.Inventario;
 import es.unizar.smartFoodTracker.model.Producto;
 import es.unizar.smartFoodTracker.model.ProductoInventario;
 import es.unizar.smartFoodTracker.model.Usuario;
-import es.unizar.smartFoodTracker.repository.InventarioRepository;
-import es.unizar.smartFoodTracker.repository.ProductoRepository;
-import es.unizar.smartFoodTracker.repository.UsuarioRepository;
 import es.unizar.smartFoodTracker.service.InventarioService;
 import es.unizar.smartFoodTracker.service.ProductoService;
 import es.unizar.smartFoodTracker.service.UsuarioService;
@@ -20,14 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- * Created by carlos on 26/03/17.
- */
 @Controller
 @RequestMapping(value = "/api")
 public class InventarioController {
@@ -46,7 +39,7 @@ public class InventarioController {
     private final Logger log = Logger.getLogger(UsuarioController.class.getName());
 
     @GetMapping(value = "/inventario")
-    public @ResponseBody List<Inventario> getInventario () {
+    public @ResponseBody List<Inventario> getInventarios () {
         return inventarioService.findAll();
     }
 
@@ -64,12 +57,12 @@ public class InventarioController {
         Usuario usuario = usuarioService.findByUsername(productoInventario.getNombreUsuario());
         Producto producto = productoService.findByNombre(productoInventario.getNombreProducto());
         if (usuario == null) {
-            log.info("Usuario " + usuario.getUsername() + " no se ha encontrado");
+            log.info("Usuario " + productoInventario.getNombreUsuario() + " no se ha encontrado");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         else{
             if (producto == null) {
-                log.info("El producto " + producto.getNombre() + " no se ha encontrado");
+                log.info("El producto " + productoInventario.getNombreUsuario() + " no se ha encontrado");
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
             else{
@@ -97,12 +90,12 @@ public class InventarioController {
         Usuario usuario = usuarioService.findByUsername(productoInventario.getNombreUsuario());
         Producto producto = productoService.findByNombre(productoInventario.getNombreProducto());
         if (usuario == null) {
-            log.info("Usuario " + usuario.getUsername() + " no se ha encontrado");
+            log.info("Usuario " + productoInventario.getNombreUsuario() + " no se ha encontrado");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         else{
             if (producto == null) {
-                log.info("El producto " + producto.getNombre() + " no se ha encontrado");
+                log.info("El producto " + productoInventario.getNombreProducto() + " no se ha encontrado");
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
             else{
@@ -134,12 +127,12 @@ public class InventarioController {
         Usuario usuario = usuarioService.findByUsername(productoInventario.getNombreUsuario());
         Producto producto = productoService.findByNombre(productoInventario.getNombreProducto());
         if (usuario == null) {
-            log.info("Usuario " + usuario.getUsername() + " no se ha encontrado");
+            log.info("Usuario " + productoInventario.getNombreUsuario() + " no se ha encontrado");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         else{
             if (producto == null) {
-                log.info("El producto " + producto.getNombre() + " no se ha encontrado");
+                log.info("El producto " + productoInventario.getNombreProducto() + " no se ha encontrado");
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
             Inventario i = inventarioService.findByUsuarioProducto(usuario, producto);
