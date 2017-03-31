@@ -40,7 +40,7 @@ public class EmailService {
         sender.setMailSender(mailSender);
     }
 
-//    @Scheduled(fixedDelay = 604800000)     //Comprobación cada 1 semana (604800000 ms)
+    //    @Scheduled(fixedDelay = 604800000)     //Comprobación cada 1 semana (604800000 ms)
     public void checkAvisoPeso() {
         log.info("Comprobando aviso peso.");
         List<Usuario> usuarios = usuarioService.findAll();
@@ -52,7 +52,7 @@ public class EmailService {
         }
     }
 
-//    @Scheduled(fixedDelay = 86400000)       //Comprobación cada día (86400000 ms)
+    //    @Scheduled(fixedDelay = 86400000)       //Comprobación cada día (86400000 ms)
     public void checkAvisoCaducidad() {
         log.info("Comprobando aviso caducidad.");
         ArrayList<Long> enviado = new ArrayList<>();

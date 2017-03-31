@@ -1,13 +1,29 @@
 language: java
+
+jdk:
+- oraclejdk8
+
+sudo: required
+
 services:
 - mysql
+
+install: true
+
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS food;'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS foodTest;'
   - mysql -e "CREATE USER 'food'@'localhost' IDENTIFIED BY 'food';"
   - mysql -e "GRANT ALL ON food.* TO 'food'@'localhost';"
   - mysql -e "GRANT ALL ON foodTest.* TO 'food'@'localhost';"
-jdk:
-- oraclejdk8
-sudo: required
+
+script:
+  - mvn -q install -PreducedMemory
+
 dist: trusty
+
+cache:
+  directories:
+    - node
+    - node_modules
+    - $HOME/.m2

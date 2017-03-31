@@ -70,13 +70,13 @@
                         cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad
                     });
                 }
+
+                vm.inventario = new NgTableParams({count: 5}, {dataset: vm.products, counts: [5, 10, 20]});
             },
             function (response) { //error
                 AlertService.addAlert('danger', 'Error al obtener el inventario del usuario ' + usuario.username);
             }
         );
-
-        vm.inventario = new NgTableParams({count: 5}, {dataset: vm.products, counts: [5, 10, 20]});
 
         //*********************************************************************************************************//
 
