@@ -19,7 +19,6 @@ before_install:
 
 script:
   - mvn -q install -PreducedMemory
-  - mvn cobertura:cobertura
 
 dist: trusty
 
