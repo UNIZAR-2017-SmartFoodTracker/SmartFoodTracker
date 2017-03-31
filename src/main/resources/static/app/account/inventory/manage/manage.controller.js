@@ -73,6 +73,9 @@
                         cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad
                     });
                 }
+
+                //Creacion tabla inventario
+                vm.inventario = new NgTableParams({count: 5}, {dataset: vm.products, counts: [5, 10, 20]});
             },
             function (response) { //error
                 AlertService.addAlert('danger', 'Error al obtener el inventario del usuario ' + usuario.username);
@@ -227,8 +230,5 @@
                 }
             );
         }
-
-        //Creacion tabla inventario
-        vm.inventario = new NgTableParams({count: 5}, {dataset: vm.products, counts: [5, 10, 20]});
     }
 })();
