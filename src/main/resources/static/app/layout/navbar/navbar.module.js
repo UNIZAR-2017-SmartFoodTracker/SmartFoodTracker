@@ -3,6 +3,7 @@
 
     angular.module('app.layout.navbar', [
         'ui.bootstrap',
-        'app.account.login'
+        'app.account.login',
+        'app.productModal'
     ]);
 })();

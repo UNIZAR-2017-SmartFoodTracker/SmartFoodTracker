@@ -17,9 +17,9 @@
             templateUrl: 'app/layout/navbar/navbar.html'
         };
 
-        NavbarController.$inject = ['$scope','$state','LoginService','AlertService'];
+        NavbarController.$inject = ['$scope','$state','LoginService','AlertService', 'ProductModalService'];
 
-        function NavbarController($scope,$state,LoginService,AlertService) {
+        function NavbarController($scope,$state,LoginService,AlertService, ProductModalService) {
             //console.log("Navbar controller called!");
             var vm = this;
             $scope.isCollapsed = true;
@@ -27,6 +27,7 @@
             vm.login = login;
             vm.logout = logout;
             vm.isLogged = isLogged;
+            vm.addProduct = addProduct;
 
             function login() {
                 $scope.isCollapsed = true;
@@ -42,6 +43,10 @@
                 AlertService.addAlert('info','Sesión cerrada satisfactoriamente');
                 LoginService.logout();
                 $state.go('landing');
+            }
+
+            function addProduct() {
+                ProductModalService.open();
             }
         }
 

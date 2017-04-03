@@ -11,7 +11,8 @@
             'app.account',
             'app.home',
             'app.landing',
-            'app.layout'])
+            'app.layout',
+            'app.productModal'])
         .config(function ($stateProvider, $urlRouterProvider,$logProvider,$locationProvider) {
             $logProvider.debugEnabled(false);
             $locationProvider.html5Mode(true);
