@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @Controller
@@ -27,15 +26,14 @@ public class CosteController {
     @Autowired
     private UsuarioService usuarioService;
 
-    private final Logger log = Logger.getLogger(UsuarioController.class.getName());
-
     @GetMapping(value = "/coste/{username:.*}/{fecha:.*}")
-    public @ResponseBody List<Coste> getCostes (@PathVariable String username,
-                           @PathVariable String fecha) {
+    public @ResponseBody
+    List<Coste> getCostes(@PathVariable String username,
+                          @PathVariable String fecha) {
         Usuario u = usuarioService.findByUsername(username);
         List<Coste> l = costeService.findByUsuario(u);
         List<Coste> lc = new ArrayList<>();
-        for (Coste coste: l) {
+        for (Coste coste : l) {
             if (coste.getFecha().equals(fecha)) {
                 lc.add(coste);
             }
@@ -44,22 +42,23 @@ public class CosteController {
     }
 
     @GetMapping(value = "/coste/{username:.*}")
-    public @ResponseBody List<CosteMes> getAllCostes (@PathVariable String username) {
+    public @ResponseBody
+    List<CosteMes> getAllCostes(@PathVariable String username) {
         Usuario u = usuarioService.findByUsername(username);
         if (u != null) {
             List<Coste> l = costeService.findByUsuario(u);
             List<String> lMes = new ArrayList<>();
             List<CosteMes> lc = new ArrayList<>();
-            for (Coste coste: l) {
+            for (Coste coste : l) {
                 if (!lMes.contains(coste.getFecha())) {
                     lMes.add(coste.getFecha());
                 }
             }
 
-            for (String fecha: lMes) {
+            for (String fecha : lMes) {
                 CosteMes cm = new CosteMes();
                 cm.setFecha(fecha);
-                for (Coste coste: l) {
+                for (Coste coste : l) {
                     if (fecha.equals(coste.getFecha())) {
                         cm.setCoste(cm.getCoste() + coste.getCoste());
                     }
@@ -67,9 +66,7 @@ public class CosteController {
                 lc.add(cm);
             }
             return lc;
-        }
-        else {
-            log.info("Usuario + " + username + " no encontrado");
+        } else {
             return new ArrayList<>();
         }
     }

@@ -1,0 +1,26 @@
+<div class="container" style="text-align: center">
+    <div class="row">
+        <h1>Introduzca el nombre de la dieta o receta a buscar</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Introduzca un nombre" ng-model="vm.search" ng-change="vm.filter(vm.search)">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h1>Dietas</h1>
+            <uib-accordion>
+                <div uib-accordion-group class="panel-default" heading="{{dieta.title}}" ng-repeat="dieta in vm.getDietas()">
+                    {{dieta.content}}
+                </div>
+            </uib-accordion>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h1>Recetas</h1>
+            <uib-accordion>
+                <div uib-accordion-group class="panel-default" heading="{{receta.title}}" ng-repeat="receta in vm.getRecetas()">
+                    {{receta.content}}
+                </div>
+            </uib-accordion>
+        </div>
+    </div>
+</div>
