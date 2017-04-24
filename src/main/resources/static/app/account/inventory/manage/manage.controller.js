@@ -62,15 +62,19 @@
                     var cantidad = objetoInventario[i].cantidad;
                     var cantidadMinima = objetoInventario[i].cantidadMinima;
                     var fechaCaducidad = new Date(objetoInventario[i].fechaCaducidad);
+                    var descripcion = objetoInventario[i].producto.descripcion;
+                    var calorias = objetoInventario[i].producto.calorias;
 
                     vm.products.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
-                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad
+                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
+                        descripcion: descripcion, calorias: calorias
                     });
 
                     originalData.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
-                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad
+                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
+                        descripcion: descripcion, calorias: calorias
                     });
                 }
 
