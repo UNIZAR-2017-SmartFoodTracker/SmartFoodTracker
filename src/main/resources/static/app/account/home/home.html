@@ -56,17 +56,29 @@
                 </div>
             </div>
             <div class="row" ng-switch-when="false">
-                <table ng-table="vm.inventario" class="table table-bordered">
-                    <tr ng-repeat="row in $data" ng-form="rowForm" style="text-align: center">
-                        <td data-title="'Nombre'"  sortable="'nombreProducto'"
-                            filter="{nombreProducto: 'text'}">{{row.nombreProducto}} </td>
-                        <td data-title="'Cantidad'" sortable="'cantidad'"
-                            filter="{cantidad: 'number'}">{{row.cantidad}}</td>
-                        <td data-title="'Mínimo'" sortable="'cantidadMinima'"
-                            filter="{cantidadMinima: 'number'}">{{row.cantidadMinima}}</td>
-                        <td data-title="'Caducidad'" sortable="'fechaCaducidad'"
-                            filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad | date:'dd/MM/yyyy'}}</td>
-                    </tr>
+                <table ng-table="vm.inventario" class="table table-bordered" id="accordion">
+                    <tbody ng-repeat="row in $data" ng-form="rowForm" style="text-align: center" data-toggle="collapse"
+                           data-target="#{{row.nombreProducto}}" data-parent="#accordion" class="accordion-toggle">
+
+                        <tr>
+                            <td data-title="'Nombre'"  sortable="'nombreProducto'"
+                                filter="{nombreProducto: 'text'}">{{row.nombreProducto}} </td>
+                            <td data-title="'Cantidad'" sortable="'cantidad'"
+                                filter="{cantidad: 'number'}">{{row.cantidad}}</td>
+                            <td data-title="'Mínimo'" sortable="'cantidadMinima'"
+                                filter="{cantidadMinima: 'number'}">{{row.cantidadMinima}}</td>
+                            <td data-title="'Caducidad'" sortable="'fechaCaducidad'"
+                                filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad | date:'dd/MM/yyyy'}}</td>
+                        </tr>
+                        <tr class="accordian-body collapse" id="{{row.nombreProducto}}">
+                            <td colspan="3" style="text-align: left;">
+                                <strong>Descripción:</strong><br>{{row.descripcion}}
+                            </td>
+                            <td colspan="2" style="text-align: left;">
+                                <strong>Calorías:</strong> {{row.calorias}} <strong>cal</strong>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
