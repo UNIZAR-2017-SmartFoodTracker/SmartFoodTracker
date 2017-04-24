@@ -76,7 +76,7 @@ public class InventarioController {
                             productoInventario.getCantidad(), date, productoInventario.getCoste());
                     inventarioService.save(inventario);
 
-                    //Insercion de el coste en esa fecha
+                    //Insercion del coste en esa fecha
                     Calendar cal = Calendar.getInstance();
                     int mes = cal.get(Calendar.MONTH) + 1;
                     int anio = cal.get(Calendar.YEAR);

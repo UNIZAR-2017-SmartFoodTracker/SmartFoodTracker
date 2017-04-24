@@ -13,8 +13,9 @@
             'app.home',
             'app.landing',
             'app.layout',
-            'app.productModal'])
-        .config(function ($stateProvider, $urlRouterProvider,$logProvider,$locationProvider) {
+            'app.productModal',
+            'app.search'])
+        .config(function ($stateProvider, $urlRouterProvider, $logProvider, $locationProvider) {
             $logProvider.debugEnabled(false);
             $locationProvider.html5Mode(true);
 
@@ -42,6 +43,12 @@
                     url: '/summary',
                     templateUrl: 'app/costs/summary/summary.html',
                     controller: 'CostsSummaryController as vm'
+
+                })
+                .state('recetasDietas', {
+                    url: '/search',
+                    templateUrl: 'app/search/search.html',
+                    controller: 'SearchController as vm'
 
                 });
         });
