@@ -5,9 +5,9 @@
         .module('app.productModal')
         .controller('ProductModalController', ProductModalController);
 
-    ProductModalController.inject = ['$uibModalInstance','$http','AlertService'];
+    ProductModalController.inject = ['$uibModalInstance','$http','$state', 'AlertService'];
 
-    function ProductModalController($uibModalInstance, $http, AlertService) {
+    function ProductModalController($uibModalInstance, $http, $state, AlertService) {
         var vm = this;
 
         vm.crearError = false;
@@ -39,6 +39,8 @@
 
                 $uibModalInstance.dismiss('success');
                 AlertService.addAlert('success', '¡Producto ' + data.nombre + ' añadido correctamente!');
+
+                $state.reload();
             }, function (response) {
                 vm.crearError = true;
             });
