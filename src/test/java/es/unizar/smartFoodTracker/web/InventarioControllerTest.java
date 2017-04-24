@@ -29,27 +29,31 @@ public class InventarioControllerTest {
     private InventarioController inventarioController;
 
     @Autowired
-    private InventarioRepository inventarioRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private RecetaRepository recetaRepository;
 
     @Autowired
     private ProductoRepository productoRepository;
 
     @Autowired
+    private InventarioRepository inventarioRepository;
+
+    @Autowired
     private DietaRepository dietaRepository;
 
     @Autowired
-    private RecetaRepository recetaRepository;
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PesoRepository pesoRepository;
 
     @Before
     public void before () {
         dietaRepository.deleteAll();
-        recetaRepository.deleteAll();
+        pesoRepository.deleteAll();
         inventarioRepository.deleteAll();
-        usuarioRepository.deleteAll();
+        recetaRepository.deleteAll();
         productoRepository.deleteAll();
+        usuarioRepository.deleteAll();
     }
 
     @Test

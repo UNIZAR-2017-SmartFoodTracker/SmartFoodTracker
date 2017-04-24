@@ -1,7 +1,7 @@
 package es.unizar.smartFoodTracker.web;
 
 import es.unizar.smartFoodTracker.model.Usuario;
-import es.unizar.smartFoodTracker.repository.UsuarioRepository;
+import es.unizar.smartFoodTracker.repository.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;

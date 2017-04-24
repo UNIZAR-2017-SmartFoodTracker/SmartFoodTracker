@@ -34,12 +34,20 @@ public class DietaControllerTest {
     @Autowired
     private DietaRepository dietaRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PesoRepository pesoRepository;
+
     @Before
     public void before () {
-        inventarioRepository.deleteAll();
         dietaRepository.deleteAll();
+        pesoRepository.deleteAll();
+        inventarioRepository.deleteAll();
         recetaRepository.deleteAll();
         productoRepository.deleteAll();
+        usuarioRepository.deleteAll();
     }
 
     @Test

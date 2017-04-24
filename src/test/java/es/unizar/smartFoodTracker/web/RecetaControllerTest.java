@@ -3,10 +3,7 @@ package es.unizar.smartFoodTracker.web;
 import es.unizar.smartFoodTracker.model.Producto;
 import es.unizar.smartFoodTracker.model.Receta;
 import es.unizar.smartFoodTracker.model.Usuario;
-import es.unizar.smartFoodTracker.repository.InventarioRepository;
-import es.unizar.smartFoodTracker.repository.ProductoRepository;
-import es.unizar.smartFoodTracker.repository.RecetaRepository;
-import es.unizar.smartFoodTracker.repository.UsuarioRepository;
+import es.unizar.smartFoodTracker.repository.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,16 +24,24 @@ public class RecetaControllerTest {
     private RecetaRepository recetaRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
     private ProductoRepository productoRepository;
 
     @Autowired
     private InventarioRepository inventarioRepository;
 
+    @Autowired
+    private DietaRepository dietaRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PesoRepository pesoRepository;
+
     @Before
     public void before () {
+        dietaRepository.deleteAll();
+        pesoRepository.deleteAll();
         inventarioRepository.deleteAll();
         recetaRepository.deleteAll();
         productoRepository.deleteAll();

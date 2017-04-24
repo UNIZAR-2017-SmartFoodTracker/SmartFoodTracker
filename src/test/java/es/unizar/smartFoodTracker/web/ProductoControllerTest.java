@@ -1,8 +1,7 @@
 package es.unizar.smartFoodTracker.web;
 
 import es.unizar.smartFoodTracker.model.Producto;
-import es.unizar.smartFoodTracker.repository.InventarioRepository;
-import es.unizar.smartFoodTracker.repository.ProductoRepository;
+import es.unizar.smartFoodTracker.repository.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -26,15 +25,31 @@ public class ProductoControllerTest {
     private ProductoController productoController;
 
     @Autowired
+    private RecetaRepository recetaRepository;
+
+    @Autowired
     private ProductoRepository productoRepository;
 
     @Autowired
     private InventarioRepository inventarioRepository;
 
+    @Autowired
+    private DietaRepository dietaRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PesoRepository pesoRepository;
+
     @Before
     public void before(){
+        dietaRepository.deleteAll();
+        pesoRepository.deleteAll();
         inventarioRepository.deleteAll();
+        recetaRepository.deleteAll();
         productoRepository.deleteAll();
+        usuarioRepository.deleteAll();
     }
 
     @Test
