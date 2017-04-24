@@ -40,16 +40,16 @@ public class ProductoControllerTest {
     @Test
     public void getAll() throws JSONException {
         int cantidad = productoRepository.findAll().size();
-        productoRepository.save(new Producto("patata"));
-        productoRepository.save(new Producto("tomate"));
-        productoRepository.save(new Producto("judia"));
+        productoRepository.save(new Producto("patata", "", 100));
+        productoRepository.save(new Producto("tomate", "", 100));
+        productoRepository.save(new Producto("judia", "", 100));
         assertEquals(cantidad + 3, productoController.getProductos().size());
     }
 
     @Test
     public void getProductoOK() throws JSONException {
         String nombre = "patata";
-        productoRepository.save(new Producto(nombre));
+        productoRepository.save(new Producto(nombre, "", 100));
         String resp = new JSONObject(productoController.getProducto(nombre)).get("nombre").toString();
         assertEquals(nombre, resp);
     }
@@ -63,7 +63,7 @@ public class ProductoControllerTest {
     @Test
     public void postProducto() throws JSONException {
         int cantidad = productoRepository.findAll().size();
-        productoController.postProducto(new Producto("patata"));
+        productoController.postProducto(new Producto("patata", "", 100));
         String resp = new JSONObject(productoController.getProducto("patata"))
                 .get("nombre").toString();
         assertEquals("patata", resp);
@@ -73,9 +73,9 @@ public class ProductoControllerTest {
     @Test
     public void postProductoExists() throws JSONException {
         int cantidad = productoRepository.findAll().size();
-        productoController.postProducto(new Producto("patata"));
+        productoController.postProducto(new Producto("patata", "", 100));
         assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR),
-                productoController.postProducto(new Producto("patata")));
+                productoController.postProducto(new Producto("patata", "", 100)));
         assertEquals(cantidad + 1, productoRepository.findAll().size());
     }
 

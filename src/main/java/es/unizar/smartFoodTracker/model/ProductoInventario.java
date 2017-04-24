@@ -12,15 +12,18 @@ public class ProductoInventario {
     private String fechaCaducidad;
     private int cantidad;
     private int cantidadMinima;
+    private double coste;
 
     public ProductoInventario(){}
 
-    public ProductoInventario(String nombreUsuario, String nombreProducto, String fechaCaducidad, int cantidad, int cantidadMinima) {
+    public ProductoInventario(String nombreUsuario, String nombreProducto, String fechaCaducidad, int cantidad,
+                              int cantidadMinima, double coste) {
         this.nombreUsuario = nombreUsuario;
         this.nombreProducto = nombreProducto;
         this.fechaCaducidad = fechaCaducidad;
         this.cantidad = cantidad;
         this.cantidadMinima = cantidadMinima;
+        this.coste = coste;
     }
 
     public String getNombreUsuario() {
@@ -61,5 +64,13 @@ public class ProductoInventario {
 
     public void setCantidadMinima(int cantidadMinima) {
         this.cantidadMinima = cantidadMinima;
+    }
+
+    public double getCoste() {
+        return coste;
+    }
+
+    public void setCoste(double coste) {
+        this.coste = coste;
     }
 }

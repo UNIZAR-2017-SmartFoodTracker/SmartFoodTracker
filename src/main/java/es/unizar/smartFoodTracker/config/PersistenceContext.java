@@ -1,9 +1,6 @@
 package es.unizar.smartFoodTracker.config;
 
-import es.unizar.smartFoodTracker.service.InventarioServiceImpl;
-import es.unizar.smartFoodTracker.service.PesoServiceImpl;
-import es.unizar.smartFoodTracker.service.ProductoServiceImpl;
-import es.unizar.smartFoodTracker.service.UsuarioServiceImpl;
+import es.unizar.smartFoodTracker.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.MailSender;
@@ -14,13 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Properties;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
-/**
- * Created by carlos on 19/03/17.
- */
 @Configuration
 @EnableAsync
 @EnableScheduling
@@ -41,6 +32,9 @@ public class PersistenceContext {
 
     @Bean
     InventarioServiceImpl inventarioService(){ return new InventarioServiceImpl(); }
+
+    @Bean
+    CosteServiceImpl costeService() {return new CosteServiceImpl();}
 
     @Bean
     SimpleMailMessage templateMessage(){

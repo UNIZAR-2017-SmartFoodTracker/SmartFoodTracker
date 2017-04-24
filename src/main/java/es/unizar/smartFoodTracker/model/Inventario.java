@@ -25,16 +25,19 @@ public class Inventario {
     private int cantidadMinima;
     private int cantidad;
     private Date fechaCaducidad;
+    private double coste;
 
     public Inventario() {
     }
 
-    public Inventario(Usuario usuario, Producto producto, int cantidadMinima, int cantidad, Date fechaCaducidad) {
+    public Inventario(Usuario usuario, Producto producto, int cantidadMinima, int cantidad, Date fechaCaducidad,
+                      double coste) {
         this.usuario = usuario;
         this.producto = producto;
         this.cantidadMinima = cantidadMinima;
         this.cantidad = cantidad;
         this.fechaCaducidad = fechaCaducidad;
+        this.coste = coste;
     }
 
     public Usuario getUsuario() {
@@ -75,6 +78,14 @@ public class Inventario {
 
     public void setFechaCaducidad(Date fechaCaducidad) {
         this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public double getCoste() {
+        return coste;
+    }
+
+    public void setCoste(double coste) {
+        this.coste = coste;
     }
 }
 

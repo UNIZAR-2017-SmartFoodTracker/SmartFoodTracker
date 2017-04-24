@@ -1,9 +1,7 @@
 package es.unizar.smartFoodTracker.web;
 
-import es.unizar.smartFoodTracker.model.Inventario;
-import es.unizar.smartFoodTracker.model.Producto;
-import es.unizar.smartFoodTracker.model.ProductoInventario;
-import es.unizar.smartFoodTracker.model.Usuario;
+import es.unizar.smartFoodTracker.model.*;
+import es.unizar.smartFoodTracker.service.CosteService;
 import es.unizar.smartFoodTracker.service.InventarioService;
 import es.unizar.smartFoodTracker.service.ProductoService;
 import es.unizar.smartFoodTracker.service.UsuarioService;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -35,6 +34,9 @@ public class InventarioController {
 
     @Autowired
     private ProductoService productoService;
+
+    @Autowired
+    private CosteService costeService;
 
     private final Logger log = Logger.getLogger(UsuarioController.class.getName());
 
@@ -71,8 +73,24 @@ public class InventarioController {
                     DateFormat formatter = new SimpleDateFormat("dd/MM/yy");
                     Date date = formatter.parse(productoInventario.getFechaCaducidad());
                     Inventario inventario = new Inventario(usuario, producto, productoInventario.getCantidadMinima(),
-                            productoInventario.getCantidad(), date);
+                            productoInventario.getCantidad(), date, productoInventario.getCoste());
                     inventarioService.save(inventario);
+
+                    //Insercion de el coste en esa fecha
+                    Calendar cal = Calendar.getInstance();
+                    int mes = cal.get(Calendar.MONTH) + 1;
+                    int anio = cal.get(Calendar.YEAR);
+                    String anioS = anio + "";
+                    String mesS;
+                    if (mes < 10) {
+                        mesS = "0" + mes;
+                    }
+                    else{
+                        mesS = mes + "";
+                    }
+                    String mesAnio = mesS + "" + anioS.substring(2, 4);
+                    costeService.save(new Coste(usuario, mesAnio, inventario.getCoste()));
+
                     log.info("Nuevo producto " + producto.getNombre() + " añadido al inventario de " + usuario.getUsername());
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 }
@@ -106,7 +124,22 @@ public class InventarioController {
                     i.setCantidad(productoInventario.getCantidad());
                     i.setCantidadMinima(productoInventario.getCantidadMinima());
                     i.setFechaCaducidad(date);
+
+                    //Insercion del nuevo producto
+                    Calendar cal = Calendar.getInstance();
                     inventarioService.save(i);
+                    int mes = cal.get(Calendar.MONTH) + 1;
+                    int anio = cal.get(Calendar.YEAR);
+                    String anioS = anio + "";
+                    String mesS;
+                    if (mes < 10) {
+                        mesS = "0" + mes;
+                    }
+                    else{
+                        mesS = mes + "";
+                    }
+                    String mesAnio = mesS + "" + anioS.substring(2, 4);
+                    costeService.save(new Coste(usuario, mesAnio, productoInventario.getCoste()));
 //                    if (i.getCantidad() < i.getCantidadMinima()) {
 //                        emailService.faltaCantidad(i); // Envia mensaje
 //                    }
