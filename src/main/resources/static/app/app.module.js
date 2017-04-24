@@ -9,6 +9,7 @@
             'angular-loading-bar',
             //Ir agregando nuevos modulos aqui cuando se vayan creando
             'app.account',
+            'app.costs',
             'app.home',
             'app.landing',
             'app.layout',
@@ -36,25 +37,13 @@
                     templateUrl: 'app/account/inventory/manage/manage.html',
                     controller: 'ManageInventoryController as vm'
 
+                })
+                .state('resumenCostes', {
+                    url: '/summary',
+                    templateUrl: 'app/costs/summary/summary.html',
+                    controller: 'CostsSummaryController as vm'
+
                 });
-            //     .state('betan', {
-            //         url: '/betan',
-            //         templateUrl: 'app/buildings/betan/betan.html',
-            //         controller: 'BetanController as vm'
-            //
-            //     })
-            //     .state('torres', {
-            //         url: '/torres',
-            //         templateUrl: 'app/buildings/torres/torres.html',
-            //         controller: 'TorresController as vm'
-            //
-            //     })
-            //     .state('crearUsuario', {
-            //         url: '/crearUsuario',
-            //         templateUrl: 'app/account/create/create.html',
-            //         controller: 'CreateController as vm'
-            //
-            //     });
         });
 
 })();

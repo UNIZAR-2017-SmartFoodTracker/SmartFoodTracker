@@ -15,6 +15,13 @@
             opacity: 0;
         }
     </style>
+    <div uib-alert ng-repeat="alert in permanentAlerts"
+         ng-class="'alert-' + (alert.type || 'warning') + ' alert-fade'" close="alert.close()">
+        ¡Enhorabuena, estás mejorando tu marca personal!
+        ¿Te gustaría compartir tu progreso en redes sociales?
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=SmartFoodTracker%20me%20está%20ayudando%20a%20llevar%20un%20mejor%20control%20de%20mi%20peso!">
+        Twittear!</a>
+    </div>
     <div uib-alert dismiss-on-timeout="5000" ng-repeat="alert in alerts"
          ng-class="'alert-' + (alert.type || 'warning') + ' alert-fade'" close="alert.close()">{{alert.msg}}</div>
     <ui-view>

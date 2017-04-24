@@ -1,0 +1,30 @@
+<style>
+    .row{
+        margin-bottom:20px;
+    }
+    h1{
+        margin-bottom:20px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-switch on="vm.data[0].length == 0">
+            <h1>
+                Resumen de los gastos de las compras por mes
+            </h1>
+            <div class="row" ng-switch-when="true">
+                <div class="jumbotron">
+                    <div class="container text-center">
+                        <p>¡Uy! Parece ser que no existen registros de compras en el sistema</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-switch-when="false">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <canvas class="chart chart-line" chart-data="vm.data" chart-labels="vm.labels"
+                            chart-click="vm.onClick" chart-options="vm.chartOptions"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
