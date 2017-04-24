@@ -4,10 +4,8 @@ import es.unizar.smartFoodTracker.model.Dieta;
 import es.unizar.smartFoodTracker.model.Producto;
 import es.unizar.smartFoodTracker.model.Receta;
 import es.unizar.smartFoodTracker.model.Usuario;
-import es.unizar.smartFoodTracker.repository.DietaRepository;
-import es.unizar.smartFoodTracker.repository.ProductoRepository;
-import es.unizar.smartFoodTracker.repository.RecetaRepository;
-import es.unizar.smartFoodTracker.repository.UsuarioRepository;
+import es.unizar.smartFoodTracker.repository.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,10 +29,14 @@ public class DietaControllerTest {
     private ProductoRepository productoRepository;
 
     @Autowired
+    private InventarioRepository inventarioRepository;
+
+    @Autowired
     private DietaRepository dietaRepository;
 
     @Before
     public void before () {
+        inventarioRepository.deleteAll();
         dietaRepository.deleteAll();
         recetaRepository.deleteAll();
         productoRepository.deleteAll();
@@ -49,4 +51,5 @@ public class DietaControllerTest {
                 "recetaDescp"));
         assertEquals(1, dietaRepository.findAll().size());
     }
+
 }
