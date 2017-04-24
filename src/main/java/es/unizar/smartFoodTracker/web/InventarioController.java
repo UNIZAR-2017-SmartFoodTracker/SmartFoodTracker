@@ -1,10 +1,7 @@
 package es.unizar.smartFoodTracker.web;
 
 import es.unizar.smartFoodTracker.model.*;
-import es.unizar.smartFoodTracker.service.CosteService;
-import es.unizar.smartFoodTracker.service.InventarioService;
-import es.unizar.smartFoodTracker.service.ProductoService;
-import es.unizar.smartFoodTracker.service.UsuarioService;
+import es.unizar.smartFoodTracker.service.*;
 import es.unizar.smartFoodTracker.service.mailService.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,7 +73,7 @@ public class InventarioController {
                             productoInventario.getCantidad(), date, productoInventario.getCoste());
                     inventarioService.save(inventario);
 
-                    //Insercion de el coste en esa fecha
+                    //Insercion del coste en esa fecha
                     Calendar cal = Calendar.getInstance();
                     int mes = cal.get(Calendar.MONTH) + 1;
                     int anio = cal.get(Calendar.YEAR);
