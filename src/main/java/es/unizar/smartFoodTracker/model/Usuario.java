@@ -2,9 +2,6 @@ package es.unizar.smartFoodTracker.model;
 
 import javax.persistence.*;
 
-/**
- * Created by carlos on 16/03/17.
- */
 @Entity
 public class Usuario {
 

@@ -51,8 +51,8 @@ public class InventarioControllerTest {
         int cantidad = inventarioRepository.findAll().size();
         Usuario usuario = new Usuario("test", "", "testNombre1",
                 "", false, "");
-        Producto p = new Producto("patata");
-        Inventario i = new Inventario(usuario, p, 1, 5, new Date());
+        Producto p = new Producto("patata", "", 100);
+        Inventario i = new Inventario(usuario, p, 1, 5, new Date(), 10.0);
         inventarioRepository.save(i);
         assertEquals(cantidad + 1, inventarioController.getInventarios().size());
     }
@@ -62,8 +62,8 @@ public class InventarioControllerTest {
         int cantidad = inventarioRepository.findAll().size();
         Usuario usuario = new Usuario("test", "", "testNombre1",
                 "", false, "");
-        Producto p = new Producto("patata");
-        Inventario i = new Inventario(usuario, p, 1, 5, new Date());
+        Producto p = new Producto("patata", "", 100);
+        Inventario i = new Inventario(usuario, p, 1, 5, new Date(), 10.0);
         inventarioRepository.save(i);
         assertEquals(cantidad + 1, inventarioController.getProductos
                 (usuario.getUsername()).size());
@@ -83,7 +83,7 @@ public class InventarioControllerTest {
         assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR),
                 inventarioController.postProducto(new ProductoInventario("test",
                         "patata", "02/02/2002",
-                        2, 1)));
+                        2, 1, 10.5)));
         assertEquals(cantidad, inventarioController.getInventarios().size());
     }
 
