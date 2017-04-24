@@ -1,10 +1,7 @@
 package es.unizar.smartFoodTracker.web;
 
 import es.unizar.smartFoodTracker.model.*;
-import es.unizar.smartFoodTracker.repository.CosteRepository;
-import es.unizar.smartFoodTracker.repository.InventarioRepository;
-import es.unizar.smartFoodTracker.repository.ProductoRepository;
-import es.unizar.smartFoodTracker.repository.UsuarioRepository;
+import es.unizar.smartFoodTracker.repository.*;
 import es.unizar.smartFoodTracker.service.CosteService;
 import es.unizar.smartFoodTracker.service.UsuarioService;
 import org.junit.*;

@@ -34,7 +34,13 @@ public class PersistenceContext {
     InventarioServiceImpl inventarioService(){ return new InventarioServiceImpl(); }
 
     @Bean
-    CosteServiceImpl costeService() {return new CosteServiceImpl();}
+    CosteServiceImpl costeService() { return new CosteServiceImpl(); }
+
+    @Bean
+    RecetaServiceImpl recetaService() { return new RecetaServiceImpl(); }
+
+    @Bean
+    DietaServiceImpl dietaService() { return new DietaServiceImpl(); }
 
     @Bean
     SimpleMailMessage templateMessage(){
