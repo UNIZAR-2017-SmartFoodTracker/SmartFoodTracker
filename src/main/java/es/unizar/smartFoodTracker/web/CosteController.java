@@ -27,12 +27,13 @@ public class CosteController {
     private UsuarioService usuarioService;
 
     @GetMapping(value = "/coste/{username:.*}/{fecha:.*}")
-    public @ResponseBody List<Coste> getCostes (@PathVariable String username,
-                           @PathVariable String fecha) {
+    public @ResponseBody
+    List<Coste> getCostes(@PathVariable String username,
+                          @PathVariable String fecha) {
         Usuario u = usuarioService.findByUsername(username);
         List<Coste> l = costeService.findByUsuario(u);
         List<Coste> lc = new ArrayList<>();
-        for (Coste coste: l) {
+        for (Coste coste : l) {
             if (coste.getFecha().equals(fecha)) {
                 lc.add(coste);
             }
@@ -41,28 +42,33 @@ public class CosteController {
     }
 
     @GetMapping(value = "/coste/{username:.*}")
-    public @ResponseBody List<CosteMes> getAllCostes (@PathVariable String username) {
+    public @ResponseBody
+    List<CosteMes> getAllCostes(@PathVariable String username) {
         Usuario u = usuarioService.findByUsername(username);
-        List<Coste> l = costeService.findByUsuario(u);
-        List<String> lMes = new ArrayList<>();
-        List<CosteMes> lc = new ArrayList<>();
-        for (Coste coste: l) {
-            if (!lMes.contains(coste.getFecha())) {
-                lMes.add(coste.getFecha());
-            }
-        }
-
-        for (String fecha: lMes) {
-            CosteMes cm = new CosteMes();
-            cm.setFecha(fecha);
-            for (Coste coste: l) {
-                if (fecha.equals(coste.getFecha())) {
-                    cm.setCoste(cm.getCoste() + coste.getCoste());
+        if (u != null) {
+            List<Coste> l = costeService.findByUsuario(u);
+            List<String> lMes = new ArrayList<>();
+            List<CosteMes> lc = new ArrayList<>();
+            for (Coste coste : l) {
+                if (!lMes.contains(coste.getFecha())) {
+                    lMes.add(coste.getFecha());
                 }
             }
-            lc.add(cm);
+
+            for (String fecha : lMes) {
+                CosteMes cm = new CosteMes();
+                cm.setFecha(fecha);
+                for (Coste coste : l) {
+                    if (fecha.equals(coste.getFecha())) {
+                        cm.setCoste(cm.getCoste() + coste.getCoste());
+                    }
+                }
+                lc.add(cm);
+            }
+            return lc;
+        } else {
+            return new ArrayList<>();
         }
-        return lc;
     }
 
 }
