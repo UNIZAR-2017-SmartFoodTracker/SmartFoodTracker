@@ -100,7 +100,20 @@
                         vm.data[0].push(vm.peso);
                         vm.labels.push($filter('date')(new Date(), "dd/MM/yyyy"));
 
+                        var pesosSistema = vm.data[0];
+                        var ultimoPeso = pesosSistema[vm.labels.length - 2];
+
+                        if (dataAPI.peso < ultimoPeso) {
+                            AlertService.addPermanentAlert('success', '¡Enhorabuena, estás mejorando tu marca personal! ' +
+                                '¿Te gustaría compartir tu progreso en redes sociales? ' +
+                                '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=' +
+                                'SmartFoodTracker%20me%20está%20ayudando%20a%20llevar%20un%20mejor%20control%20de%20mi%20peso!"> ' +
+                                '  Twitter</a>');
+                        }
+
                         AlertService.addAlert('success', 'Nuevo peso añadido al sistema');
+
+
                     },
                     function (response) { //error
                         AlertService.addAlert('danger', 'Error del sistema al intentar añadir el peso');
