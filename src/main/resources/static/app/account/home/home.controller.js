@@ -52,7 +52,7 @@
         //Inventario
 
         vm.products = [];
-
+        vm.valorTotal = null;
         //Obtenemos inventario
         $http.get("/api/inventario/" + usuario.username).then(
             function (response) { //success
@@ -64,10 +64,13 @@
                     var cantidad = objetoInventario[i].cantidad;
                     var cantidadMinima = objetoInventario[i].cantidadMinima;
                     var fechaCaducidad = new Date(objetoInventario[i].fechaCaducidad);
-
+                    var coste = objetoInventario[i].coste;
+                    vm.valorTotal += cantidad*coste;
+                    //console.log(vm.valorTotal);
                     vm.products.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
-                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad
+                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
+                        coste: coste
                     });
                 }
 

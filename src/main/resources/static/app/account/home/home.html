@@ -66,8 +66,12 @@
                             filter="{cantidadMinima: 'number'}">{{row.cantidadMinima}}</td>
                         <td data-title="'Caducidad'" sortable="'fechaCaducidad'"
                             filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad | date:'dd/MM/yyyy'}}</td>
+                        <td data-title="'Coste (€)'" sortable="'coste'"
+                            filter="{coste: 'number'}">{{row.coste}}</td>
                     </tr>
                 </table>
+                <label>Valor total del inventario (€)</label>
+                <p style="font-size:30px">{{vm.valorTotal}}</p>
             </div>
         </div>
     </div>
