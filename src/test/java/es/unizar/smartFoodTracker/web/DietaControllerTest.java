@@ -35,9 +35,9 @@ public class DietaControllerTest {
 
     @Before
     public void before () {
+        dietaRepository.deleteAll();
         recetaRepository.deleteAll();
         productoRepository.deleteAll();
-        dietaRepository.deleteAll();
     }
 
     @Test
