@@ -21,7 +21,9 @@
 
         function cancel() {
             vm = {
-                name: null
+                name: null,
+                descripcion: null,
+                calorias: null
             };
             vm.crearError = false;
             $uibModalInstance.dismiss('cancel');
@@ -31,11 +33,15 @@
             event.preventDefault();
 
             var data = {
-                nombre: vm.name
+                nombre: vm.name,
+                descripcion: vm.descripcion,
+                calorias: vm.calorias
             };
 
             $http.post("/api/producto", data).then(function (response) {
                 vm.name = null;
+                vm.descripcion = null;
+                vm.calorias = null;
 
                 $uibModalInstance.dismiss('success');
                 AlertService.addAlert('success', '¡Producto ' + data.nombre + ' añadido correctamente!');
