@@ -98,7 +98,7 @@
                         </td>
                     </tr>
                     <tr class="collapse" id="{{row.nombreProducto}}">
-                        <td colspan="3" style="text-align: left;">
+                        <td colspan="4" style="text-align: left;">
                             <strong>Descripción:</strong><br>{{row.descripcion}}
                         </td>
                         <td colspan="2" style="text-align: left;">
@@ -160,19 +160,19 @@
                                     <input type="number" step="0.01" name="coste" ng-model="vm.coste"
                                            placeholder="Introducir coste unitario" class="form-control" min="1" required/>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label>Descripción:</label>
-                                    <textarea name="description" placeholder="Descripción del producto" style="resize: none"
-                                              class="form-control" readonly>{{selected.value.description}}</textarea>
-                                </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <label>Calorías:</label>
                                     <input type="text" name="cal" value="{{selected.value.cal}}"
                                            placeholder="Calorías del producto" class="form-control" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <label>Descripción:</label>
+                                    <textarea name="description" placeholder="Descripción del producto" style="resize: none"
+                                              class="form-control" readonly>{{selected.value.description}}</textarea>
                                 </div>
                             </div>
                         </div>
