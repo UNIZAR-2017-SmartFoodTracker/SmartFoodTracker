@@ -25,9 +25,8 @@
                 <h1>
                     Gestión de su inventario
                 </h1>
-                <table ng-table="vm.inventario" class="table table-bordered" id="accordion">
-                    <tbody ng-repeat="row in $data" ng-form="rowForm" style="text-align: center" data-toggle="collapse"
-                           data-target="#{{row.nombreProducto}}" data-parent="#accordion" class="accordion-toggle">
+                <table ng-table="vm.inventario" class="table table-bordered">
+                    <tbody ng-repeat="row in $data" ng-form="rowForm" style="text-align: center">
                     <tr>
                         <td data-title="'Nombre'" sortable="'nombreProducto'"
                             filter="{nombreProducto: 'text'}">{{row.nombreProducto}}
@@ -66,6 +65,16 @@
                                 <!--class="editable-input form-control input-sm" required/>-->
                             </div>
                         </td>
+                        <td title="'Coste (€)'" filter="{coste: 'number'}" sortable="'coste'"
+                            ng-switch="row.isEditing" ng-class="coste.$dirty ? 'bg-warning' : ''"
+                            ng-form="coste">
+                            <span ng-switch-default class="editable-text">{{row.coste}}</span>
+                            <div class="controls" ng-class="coste.$invalid && coste.$dirty ?
+                            'has-error' : ''" ng-switch-when="true">
+                                <input type="number" step="0.01" name="coste" ng-model="row.coste"
+                                       class="editable-input form-control input-sm" required/>
+                            </div>
+                        </td>
                         <td style="white-space:nowrap;">
                             <button class="btn btn-primary btn-sm" ng-click="vm.save(row, rowForm)"
                                     ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid">
@@ -74,6 +83,10 @@
                             <button class="btn btn-default btn-sm" ng-click="vm.cancel(row, rowForm)"
                                     ng-if="row.isEditing">
                                 <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <button class="btn btn-default btn-sm" ng-if="!row.isEditing" data-toggle="collapse"
+                                    data-target="#{{row.nombreProducto}}">
+                                <span class="glyphicon glyphicon-th-list"></span>
                             </button>
                             <button class="btn btn-default btn-sm" ng-click="row.isEditing = true"
                                     ng-if="!row.isEditing">
@@ -84,7 +97,7 @@
                             </button>
                         </td>
                     </tr>
-                    <tr class="accordian-body collapse" id="{{row.nombreProducto}}">
+                    <tr class="collapse" id="{{row.nombreProducto}}">
                         <td colspan="3" style="text-align: left;">
                             <strong>Descripción:</strong><br>{{row.descripcion}}
                         </td>
@@ -137,6 +150,29 @@
                                     <label>Cantidad mínima:</label>
                                     <input type="number" name="cantidadMinima" ng-model="vm.cantidadMinima"
                                            placeholder="Introducir cantidad mínima" class="form-control" min="1" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <label>Coste (€):</label>
+                                    <input type="number" step="0.01" name="coste" ng-model="vm.coste"
+                                           placeholder="Introducir coste unitario" class="form-control" min="1" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <label>Descripción:</label>
+                                    <textarea name="description" placeholder="Descripción del producto" style="resize: none"
+                                              class="form-control" readonly>{{selected.value.description}}</textarea>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <label>Calorías:</label>
+                                    <input type="text" name="cal" value="{{selected.value.cal}}"
+                                           placeholder="Calorías del producto" class="form-control" readonly/>
                                 </div>
                             </div>
                         </div>

@@ -56,10 +56,9 @@
                 </div>
             </div>
             <div class="row" ng-switch-when="false">
-                <table ng-table="vm.inventario" class="table table-bordered" id="accordion">
+                <table ng-table="vm.inventario" class="table table-bordered">
                     <tbody ng-repeat="row in $data" ng-form="rowForm" style="text-align: center" data-toggle="collapse"
-                           data-target="#{{row.nombreProducto}}" data-parent="#accordion" class="accordion-toggle">
-
+                           data-target="#{{row.nombreProducto}}">
                         <tr>
                             <td data-title="'Nombre'"  sortable="'nombreProducto'"
                                 filter="{nombreProducto: 'text'}">{{row.nombreProducto}} </td>
@@ -69,9 +68,17 @@
                                 filter="{cantidadMinima: 'number'}">{{row.cantidadMinima}}</td>
                             <td data-title="'Caducidad'" sortable="'fechaCaducidad'"
                                 filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad | date:'dd/MM/yyyy'}}</td>
+                            <td data-title="'Coste (€)'" sortable="'coste'"
+                                filter="{coste: 'number'}">{{row.coste}}</td>
+                            <td>
+                                <button class="btn btn-default btn-sm" data-toggle="collapse"
+                                        data-target="#{{row.nombreProducto}}">
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                </button>
+                            </td>
                         </tr>
-                        <tr class="accordian-body collapse" id="{{row.nombreProducto}}">
-                            <td colspan="3" style="text-align: left;">
+                        <tr class="collapse" id="{{row.nombreProducto}}">
+                            <td colspan="4" style="text-align: left;">
                                 <strong>Descripción:</strong><br>{{row.descripcion}}
                             </td>
                             <td colspan="2" style="text-align: left;">
@@ -80,6 +87,8 @@
                         </tr>
                     </tbody>
                 </table>
+                <label>Valor total del inventario (€)</label>
+                <p style="font-size:30px">{{vm.valorTotal}}</p>
             </div>
         </div>
     </div>

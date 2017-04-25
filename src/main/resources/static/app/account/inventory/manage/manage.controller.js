@@ -30,9 +30,11 @@
                 for (var i = 0; i < objetoProducto.length; i++) {
                     var idProducto = objetoProducto[i].idProducto;
                     var nombreProducto = objetoProducto[i].nombre;
+                    var descripcionProducto = objetoProducto[i].descripcion;
+                    var caloriasProducto = objetoProducto[i].calorias;
 
                     vm.availableOptions.push({
-                        value: idProducto, name: nombreProducto
+                        value: idProducto, name: nombreProducto, description: descripcionProducto, cal: caloriasProducto
                     });
                 }
             },
@@ -43,7 +45,10 @@
 
         vm.cantidad = null;
         vm.cantidadMinima = null;
+        vm.coste = null;
         vm.fechaCaducidad = new Date();
+        vm.descripcion = null;
+        vm.calorias = null;
         vm.availableOptions = availableOptions;
         $scope.selected = {};
         vm.cancel = cancel;
@@ -64,17 +69,20 @@
                     var fechaCaducidad = new Date(objetoInventario[i].fechaCaducidad);
                     var descripcion = objetoInventario[i].producto.descripcion;
                     var calorias = objetoInventario[i].producto.calorias;
+                    var coste = objetoInventario[i].coste;
 
                     vm.products.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
                         cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
-                        descripcion: descripcion, calorias: calorias
+                        descripcion: descripcion, calorias: calorias,
+                        coste: coste
                     });
 
                     originalData.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
                         cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
-                        descripcion: descripcion, calorias: calorias
+                        descripcion: descripcion, calorias: calorias,
+                        coste: coste
                     });
                 }
 
@@ -96,7 +104,8 @@
                     nombreProducto: $scope.selected.value.name,
                     fechaCaducidad: ($filter('date')(vm.fechaCaducidad,"dd/MM/yyyy")),
                     cantidad: vm.cantidad,
-                    cantidadMinima: vm.cantidadMinima
+                    cantidadMinima: vm.cantidadMinima,
+                    coste: vm.coste
                 };
 
                 //console.log(data);
@@ -109,21 +118,30 @@
                             nombreProducto: data.nombreProducto,
                             fechaCaducidad: vm.fechaCaducidad,
                             cantidad: data.cantidad,
-                            cantidadMinima: data.cantidadMinima
+                            cantidadMinima: data.cantidadMinima,
+                            descripcion: $scope.selected.value.description,
+                            calorias: $scope.selected.value.cal,
+                            coste: data.coste
                         });
 
                         originalData.push({
                             nombreProducto: data.nombreProducto,
                             fechaCaducidad: vm.fechaCaducidad,
                             cantidad: data.cantidad,
-                            cantidadMinima: data.cantidadMinima
+                            cantidadMinima: data.cantidadMinima,
+                            descripcion: $scope.selected.value.description,
+                            calorias: $scope.selected.value.cal,
+                            coste: data.coste
                         });
 
                         AlertService.addAlert('success','¡El producto ' + data.nombreProducto + ' ha sido añadido con éxito!');
 
                         vm.cantidad = null;
                         vm.cantidadMinima = null;
+                        vm.coste = null;
                         vm.fechaCaducidad = new Date();
+                        vm.descripcion = null;
+                        vm.calorias = null;
                         vm.availableOptions = availableOptions;
                         $scope.selected = {};
 
@@ -138,7 +156,7 @@
 
         function cancel(row, rowForm) {
             var originalRow = resetRow(row, rowForm);
-            angular.extend(row, originalRow);
+            angular.extend(originalRow, row);
         }
 
         function del(row) {
@@ -149,7 +167,8 @@
                 nombreProducto: row.nombreProducto,
                 fechaCaducidad: ($filter('date')(row.fechaCaducidad,"dd/MM/yyyy")),
                 cantidad: row.cantidad,
-                cantidadMinima: row.cantidadMinima
+                cantidadMinima: row.cantidadMinima,
+                coste: row.coste
             };
 
             //console.log(data);
@@ -216,7 +235,8 @@
                 nombreProducto: row.nombreProducto,
                 fechaCaducidad: ($filter('date')(row.fechaCaducidad,"dd/MM/yyyy")),
                 cantidad: row.cantidad,
-                cantidadMinima: row.cantidadMinima
+                cantidadMinima: row.cantidadMinima,
+                coste: row.coste
             };
 
             //console.log(data);
