@@ -43,6 +43,7 @@
 
         vm.cantidad = null;
         vm.cantidadMinima = null;
+        vm.coste = null;
         vm.fechaCaducidad = new Date();
         vm.availableOptions = availableOptions;
         $scope.selected = {};
@@ -62,15 +63,18 @@
                     var cantidad = objetoInventario[i].cantidad;
                     var cantidadMinima = objetoInventario[i].cantidadMinima;
                     var fechaCaducidad = new Date(objetoInventario[i].fechaCaducidad);
+                    var coste = objetoInventario[i].coste;
 
                     vm.products.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
-                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad
+                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
+                        coste: coste
                     });
 
                     originalData.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
-                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad
+                        cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
+                        coste: coste
                     });
                 }
 
@@ -92,7 +96,8 @@
                     nombreProducto: $scope.selected.value.name,
                     fechaCaducidad: ($filter('date')(vm.fechaCaducidad,"dd/MM/yyyy")),
                     cantidad: vm.cantidad,
-                    cantidadMinima: vm.cantidadMinima
+                    cantidadMinima: vm.cantidadMinima,
+                    coste: vm.coste
                 };
 
                 //console.log(data);
@@ -105,20 +110,23 @@
                             nombreProducto: data.nombreProducto,
                             fechaCaducidad: vm.fechaCaducidad,
                             cantidad: data.cantidad,
-                            cantidadMinima: data.cantidadMinima
+                            cantidadMinima: data.cantidadMinima,
+                            coste: data.coste
                         });
 
                         originalData.push({
                             nombreProducto: data.nombreProducto,
                             fechaCaducidad: vm.fechaCaducidad,
                             cantidad: data.cantidad,
-                            cantidadMinima: data.cantidadMinima
+                            cantidadMinima: data.cantidadMinima,
+                            coste: data.coste
                         });
 
                         AlertService.addAlert('success','¡El producto ' + data.nombreProducto + ' ha sido añadido con éxito!');
 
                         vm.cantidad = null;
                         vm.cantidadMinima = null;
+                        vm.coste = null;
                         vm.fechaCaducidad = new Date();
                         vm.availableOptions = availableOptions;
                         $scope.selected = {};
@@ -145,7 +153,8 @@
                 nombreProducto: row.nombreProducto,
                 fechaCaducidad: ($filter('date')(row.fechaCaducidad,"dd/MM/yyyy")),
                 cantidad: row.cantidad,
-                cantidadMinima: row.cantidadMinima
+                cantidadMinima: row.cantidadMinima,
+                coste: row.coste
             };
 
             //console.log(data);
@@ -212,10 +221,11 @@
                 nombreProducto: row.nombreProducto,
                 fechaCaducidad: ($filter('date')(row.fechaCaducidad,"dd/MM/yyyy")),
                 cantidad: row.cantidad,
-                cantidadMinima: row.cantidadMinima
+                cantidadMinima: row.cantidadMinima,
+                coste: row.coste
             };
 
-            //console.log(data);
+            console.log(data);
 
             $http.put("/api/inventario", data).then(
                 function (response) { //success

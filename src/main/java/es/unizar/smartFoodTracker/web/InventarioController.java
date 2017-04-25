@@ -120,6 +120,7 @@ public class InventarioController {
                     Date date = formatter.parse(productoInventario.getFechaCaducidad());
                     i.setCantidad(productoInventario.getCantidad());
                     i.setCantidadMinima(productoInventario.getCantidadMinima());
+                    i.setCoste(productoInventario.getCoste());
                     i.setFechaCaducidad(date);
 
                     //Insercion del nuevo producto
