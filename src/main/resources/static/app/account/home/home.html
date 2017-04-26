@@ -8,7 +8,7 @@
 </style>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-switch on="vm.data[0].length == 0">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" ng-switch on="vm.data[0].length == 0">
             <h1>
                 Historial de su peso
             </h1>
@@ -44,6 +44,7 @@
                 </div>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-switch on="vm.products.length == 0">
             <h1>
                 Resumen de su inventario
@@ -57,18 +58,35 @@
             </div>
             <div class="row" ng-switch-when="false">
                 <table ng-table="vm.inventario" class="table table-bordered">
-                    <tr ng-repeat="row in $data" ng-form="rowForm" style="text-align: center">
-                        <td data-title="'Nombre'"  sortable="'nombreProducto'"
-                            filter="{nombreProducto: 'text'}">{{row.nombreProducto}} </td>
-                        <td data-title="'Cantidad'" sortable="'cantidad'"
-                            filter="{cantidad: 'number'}">{{row.cantidad}}</td>
-                        <td data-title="'Mínimo'" sortable="'cantidadMinima'"
-                            filter="{cantidadMinima: 'number'}">{{row.cantidadMinima}}</td>
-                        <td data-title="'Caducidad'" sortable="'fechaCaducidad'"
-                            filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad | date:'dd/MM/yyyy'}}</td>
-                        <td data-title="'Coste (€)'" sortable="'coste'"
-                            filter="{coste: 'number'}">{{row.coste}}</td>
-                    </tr>
+                    <tbody ng-repeat="row in $data" ng-form="rowForm" style="text-align: center" data-toggle="collapse"
+                           data-target="#{{row.nombreProducto}}">
+                        <tr>
+                            <td data-title="'Nombre'"  sortable="'nombreProducto'"
+                                filter="{nombreProducto: 'text'}">{{row.nombreProducto}} </td>
+                            <td data-title="'Cantidad'" sortable="'cantidad'"
+                                filter="{cantidad: 'number'}">{{row.cantidad}}</td>
+                            <td data-title="'Mínimo'" sortable="'cantidadMinima'"
+                                filter="{cantidadMinima: 'number'}">{{row.cantidadMinima}}</td>
+                            <td data-title="'Caducidad'" sortable="'fechaCaducidad'"
+                                filter="{fechaCaducidad: 'text'}">{{row.fechaCaducidad | date:'dd/MM/yyyy'}}</td>
+                            <td data-title="'Coste (€)'" sortable="'coste'"
+                                filter="{coste: 'number'}">{{row.coste}}</td>
+                            <td>
+                                <button class="btn btn-default btn-sm" data-toggle="collapse"
+                                        data-target="#{{row.nombreProducto}}">
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="collapse" id="{{row.nombreProducto}}">
+                            <td colspan="4" style="text-align: left;">
+                                <strong>Descripción:</strong><br>{{row.descripcion}}
+                            </td>
+                            <td colspan="2" style="text-align: left;">
+                                <strong>Calorías:</strong> {{row.calorias}} <strong>cal</strong>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
                 <label>Valor total del inventario (€)</label>
                 <p style="font-size:30px">{{vm.valorTotal}}</p>

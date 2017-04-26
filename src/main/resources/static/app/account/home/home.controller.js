@@ -64,12 +64,16 @@
                     var cantidad = objetoInventario[i].cantidad;
                     var cantidadMinima = objetoInventario[i].cantidadMinima;
                     var fechaCaducidad = new Date(objetoInventario[i].fechaCaducidad);
+                    var descripcion = objetoInventario[i].producto.descripcion;
+                    var calorias = objetoInventario[i].producto.calorias;
+
                     var coste = objetoInventario[i].coste;
                     vm.valorTotal += cantidad*coste;
                     //console.log(vm.valorTotal);
                     vm.products.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
                         cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
+                        descripcion: descripcion, calorias: calorias,
                         coste: coste
                     });
                 }

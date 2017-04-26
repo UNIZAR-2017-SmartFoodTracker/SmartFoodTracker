@@ -30,9 +30,11 @@
                 for (var i = 0; i < objetoProducto.length; i++) {
                     var idProducto = objetoProducto[i].idProducto;
                     var nombreProducto = objetoProducto[i].nombre;
+                    var descripcionProducto = objetoProducto[i].descripcion;
+                    var caloriasProducto = objetoProducto[i].calorias;
 
                     vm.availableOptions.push({
-                        value: idProducto, name: nombreProducto
+                        value: idProducto, name: nombreProducto, description: descripcionProducto, cal: caloriasProducto
                     });
                 }
             },
@@ -45,6 +47,8 @@
         vm.cantidadMinima = null;
         vm.coste = null;
         vm.fechaCaducidad = new Date();
+        vm.descripcion = null;
+        vm.calorias = null;
         vm.availableOptions = availableOptions;
         $scope.selected = {};
         vm.cancel = cancel;
@@ -63,17 +67,21 @@
                     var cantidad = objetoInventario[i].cantidad;
                     var cantidadMinima = objetoInventario[i].cantidadMinima;
                     var fechaCaducidad = new Date(objetoInventario[i].fechaCaducidad);
+                    var descripcion = objetoInventario[i].producto.descripcion;
+                    var calorias = objetoInventario[i].producto.calorias;
                     var coste = objetoInventario[i].coste;
 
                     vm.products.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
                         cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
+                        descripcion: descripcion, calorias: calorias,
                         coste: coste
                     });
 
                     originalData.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
                         cantidadMinima: cantidadMinima, fechaCaducidad: fechaCaducidad,
+                        descripcion: descripcion, calorias: calorias,
                         coste: coste
                     });
                 }
@@ -111,6 +119,8 @@
                             fechaCaducidad: vm.fechaCaducidad,
                             cantidad: data.cantidad,
                             cantidadMinima: data.cantidadMinima,
+                            descripcion: $scope.selected.value.description,
+                            calorias: $scope.selected.value.cal,
                             coste: data.coste
                         });
 
@@ -119,6 +129,8 @@
                             fechaCaducidad: vm.fechaCaducidad,
                             cantidad: data.cantidad,
                             cantidadMinima: data.cantidadMinima,
+                            descripcion: $scope.selected.value.description,
+                            calorias: $scope.selected.value.cal,
                             coste: data.coste
                         });
 
@@ -128,6 +140,8 @@
                         vm.cantidadMinima = null;
                         vm.coste = null;
                         vm.fechaCaducidad = new Date();
+                        vm.descripcion = null;
+                        vm.calorias = null;
                         vm.availableOptions = availableOptions;
                         $scope.selected = {};
 
@@ -142,7 +156,7 @@
 
         function cancel(row, rowForm) {
             var originalRow = resetRow(row, rowForm);
-            angular.extend(row, originalRow);
+            angular.extend(originalRow, row);
         }
 
         function del(row) {
@@ -225,7 +239,7 @@
                 coste: row.coste
             };
 
-            console.log(data);
+            //console.log(data);
 
             $http.put("/api/inventario", data).then(
                 function (response) { //success
