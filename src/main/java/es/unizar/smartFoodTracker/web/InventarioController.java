@@ -123,7 +123,7 @@ public class InventarioController {
                     i.setCoste(productoInventario.getCoste());
                     i.setFechaCaducidad(date);
 
-                    if (cantidadAnterior > nuevaCantidad) {
+                    if (cantidadAnterior < nuevaCantidad) {
                         //Insercion del nuevo producto
                         Calendar cal = Calendar.getInstance();
                         inventarioService.save(i);

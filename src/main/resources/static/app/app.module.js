@@ -10,7 +10,6 @@
             //Ir agregando nuevos modulos aqui cuando se vayan creando
             'app.account',
             'app.costs',
-            'app.home',
             'app.landing',
             'app.layout',
             'app.productModal',

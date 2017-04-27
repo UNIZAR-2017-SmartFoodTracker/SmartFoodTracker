@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.home')
+        .module('app.layout')
         .factory('AlertService', AlertService);
 
     function AlertService($rootScope) {
