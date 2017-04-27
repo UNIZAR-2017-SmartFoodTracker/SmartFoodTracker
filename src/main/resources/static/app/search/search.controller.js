@@ -5,36 +5,83 @@
         .module('app.search')
         .controller('SearchController', SearchController);
 
-    //SearchController.$inject = ['dependency'];
+    SearchController.$inject = ['$http', 'AlertService'];
 
     /* @ngInject */
-    function SearchController() {
+    function SearchController($http, AlertService) {
         var vm = this;
         vm.search = null;
 
-        vm.dietasAPI = [
-            {
-                title: 'Cucurucho',
-                content: 'Primera comida: follar' +
-                'Segunda comida: un cacahuete' +
-                'Tercera comida: follar' +
-                'Cuarta comida: otro cacahuete'
+        vm.dietasAPI = [];
+        vm.recetasAPI = [];
+
+        // vm.dietasAPI = [
+        //     {
+        //         title: 'Cucurucho',
+        //         content: 'Primera comida: follar' +
+        //         'Segunda comida: un cacahuete' +
+        //         'Tercera comida: follar' +
+        //         'Cuarta comida: otro cacahuete'
+        //     },
+        //     {
+        //         title: 'Alcaparra',
+        //         content: 'Primera y única comida: alcaparra'
+        //     }
+        // ];
+        // vm.recetasAPI = [
+        //     {
+        //         title: 'Pene al vodka',
+        //         content: 'Pues primero se coge el pene, luego se le echa vodka, y ale.'
+        //     },
+        //     {
+        //         title: 'Canelones',
+        //         content: 'Los compras congelados, los descongelas, y ale.'
+        //     }
+        // ];
+
+
+        $http.get("/api/recetas/").then(
+            function (response) { //success
+                var objetoRecetas = response.data;
+                //console.log("Inventario: " + objetoInventario);
+
+                for (var i = 0; i < objetoRecetas.length; i++) {
+                    var nombreProducto = objetoRecetas[i].nombre;
+                    var cantidad = objetoRecetas[i].descripcion;
+
+                    vm.recetasAPI.push({
+                        title: nombreProducto,
+                        content: cantidad
+                    });
+                }
             },
-            {
-                title: 'Alcaparra',
-                content: 'Primera y única comida: alcaparra'
+            function (response) { //error
+                AlertService.addAlert('danger', 'Error al obtener las recetas del sistema');
             }
-        ];
-        vm.recetasAPI = [
-            {
-                title: 'Pene al vodka',
-                content: 'Pues primero se coge el pene, luego se le echa vodka, y ale.'
+        );
+
+
+        $http.get("/api/dietas/").then(
+            function (response) { //success
+                var objetoDietas = response.data;
+                //console.log("Inventario: " + objetoInventario);
+
+                for (var i = 0; i < objetoDietas.length; i++) {
+                    var nombreProducto = objetoDietas[i].nombre;
+                    var cantidad = objetoDietas[i].descripcion;
+
+                    vm.dietasAPI.push({
+                        title: nombreProducto,
+                        content: cantidad
+                    });
+                }
             },
-            {
-                title: 'Canelones',
-                content: 'Los compras congelados, los descongelas, y ale.'
+            function (response) { //error
+                AlertService.addAlert('danger', 'Error al obtener las dietas del sistema');
             }
-        ];
+        );
+
+
 
         vm.filter = filter;
         vm.getDietas = getDietas;

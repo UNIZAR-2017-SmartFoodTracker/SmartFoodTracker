@@ -68,7 +68,7 @@
                     var calorias = objetoInventario[i].producto.calorias;
 
                     var coste = objetoInventario[i].coste;
-                    vm.valorTotal += cantidad*coste;
+                    vm.valorTotal += coste;
                     //console.log(vm.valorTotal);
                     vm.products.push({
                         nombreProducto: nombreProducto, cantidad: cantidad,
