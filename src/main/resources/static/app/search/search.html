@@ -1,8 +1,8 @@
 <div class="container" style="text-align: center">
     <div class="row">
-        <h1>Introduzca el nombre de la dieta o receta a buscar</h1>
+        <h1>Introduzca el nombre de la dieta o calorías máximas</h1>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Introduzca un nombre" ng-model="vm.search" ng-change="vm.filter(vm.search)">
+            <input type="text" class="form-control" placeholder="Introduzca nombre o calorías máximas" ng-model="vm.search" ng-change="vm.filter(vm.search)">
         </div>
     </div>
     <div class="row">
@@ -11,6 +11,7 @@
             <uib-accordion>
                 <div uib-accordion-group class="panel-default" heading="{{dieta.title}}" ng-repeat="dieta in vm.getDietas()">
                     {{dieta.content}}
+                    <br/><b>Calorías:</b> {{dieta.calories}}
                 </div>
             </uib-accordion>
         </div>
@@ -19,6 +20,7 @@
             <uib-accordion>
                 <div uib-accordion-group class="panel-default" heading="{{receta.title}}" ng-repeat="receta in vm.getRecetas()">
                     {{receta.content}}
+                    <br/><b>Calorías:</b> {{receta.calories}}
                 </div>
             </uib-accordion>
         </div>

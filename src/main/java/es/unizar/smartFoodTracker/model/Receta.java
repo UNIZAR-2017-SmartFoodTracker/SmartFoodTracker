@@ -10,7 +10,7 @@ public class Receta {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nombre;
-    @OneToMany
+    @ManyToMany
     private List<Producto> productos;
     private String descripcion;
 
