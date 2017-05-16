@@ -122,12 +122,14 @@
             vm.recetas = [];
 
             for(var i = 0; i < vm.dietasAPI.length; i++){
-                if((vm.dietasAPI[i].calories <= query || vm.dietasAPI[i].title === query || vm.dietasAPI[i].title.toLowerCase().startsWith(query.toLowerCase()))){
+                if((vm.dietasAPI[i].calories <= query || vm.dietasAPI[i].title === query || (vm.dietasAPI[i].content.toLowerCase().search(query.toLowerCase()) != -1) ||
+                    vm.dietasAPI[i].title.toLowerCase().startsWith(query.toLowerCase()))){
                     vm.dietas.push(vm.dietasAPI[i]);
                 }
             }
             for(var j = 0; j < vm.recetasAPI.length; j++){
-                if((vm.recetasAPI[j].calories <= query || vm.recetasAPI[j].title === query || vm.recetasAPI[j].title.toLowerCase().startsWith(query.toLowerCase()))){
+                if((vm.recetasAPI[j].calories <= query || vm.recetasAPI[j].title === query || (vm.recetasAPI[j].content.toLowerCase().search(query.toLowerCase()) != -1) ||
+                    vm.recetasAPI[j].title.toLowerCase().startsWith(query.toLowerCase()))){
                     vm.recetas.push(vm.recetasAPI[j]);
                 }
             }
