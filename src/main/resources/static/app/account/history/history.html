@@ -1,0 +1,108 @@
+<style>
+    .row {
+        margin-bottom: 20px;
+    }
+
+    h1,h2 {
+        margin-bottom: 20px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8" ng-switch
+             on="vm.recetas.length == 0">
+            <div class="row" ng-switch-when="true">
+                <h1>
+                    Historial de recetas
+                </h1>
+                <div class="jumbotron">
+                    <div class="container text-center">
+                        <p>¡Uy! Parece ser que no existen recetas asociadas a su cuenta</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-switch-when="false">
+                <h1>
+                    Historial de recetas
+                </h1>
+                <table ng-table="vm.recetasTable" class="table table-bordered">
+                    <tbody ng-repeat="row in $data" ng-form="rowForm" style="text-align: center">
+                    <tr>
+                        <td data-title="'Nombre'" sortable="'nombreReceta'"
+                            filter="{nombreReceta: 'text'}">{{row.nombreReceta}}
+                        </td>
+                        <td data-title="'Calorías'" sortable="'calorias'"
+                            filter="{calorias: 'number'}">{{row.calorias}}
+                        </td>
+                        <td data-title="'Valoración'" sortable="'valoracion'"
+                            filter="{valoracion: 'number'}">{{row.valoracion}}
+                        </td>
+                        <td style="white-space:nowrap;">
+                            <button class="btn btn-default btn-sm" data-toggle="collapse"
+                                    data-target="#{{row.id}}"><span class="glyphicon glyphicon-th-list"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="collapse" id="{{row.id}}">
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Descripción:</strong><br>{{row.descripcion}}
+                        </td>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Productos:</strong><br>{{row.productos}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8" ng-switch
+             on="vm.dietas.length == 0">
+            <div class="row" ng-switch-when="true">
+                <h1>
+                    Historial de dietas
+                </h1>
+                <div class="jumbotron">
+                    <div class="container text-center">
+                        <p>¡Uy! Parece ser que no existen dietas asociadas a su cuenta</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-switch-when="false">
+                <h1>
+                    Historial de dietas
+                </h1>
+                <table ng-table="vm.dietasTable" class="table table-bordered">
+                    <tbody ng-repeat="row2 in $data" ng-form="rowForm" style="text-align: center">
+                    <tr>
+                        <td data-title="'Nombre'" sortable="'nombreReceta'"
+                            filter="{nombreReceta: 'text'}">{{row2.nombreReceta}}
+                        </td>
+                        <td data-title="'Calorías'" sortable="'calorias'"
+                            filter="{calorias: 'number'}">{{row2.calorias}}
+                        </td>
+                        <td data-title="'Valoración'" sortable="'valoracion'"
+                            filter="{valoracion: 'number'}">{{row2.valoracion}}
+                        </td>
+                        <td style="white-space:nowrap;">
+                            <button class="btn btn-default btn-sm" data-toggle="collapse"
+                                    data-target="#{{row2.id}}"><span class="glyphicon glyphicon-th-list"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="collapse" id="{{row2.id}}">
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Descripción:</strong><br>{{row2.descripcion}}
+                        </td>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Recetas:</strong><br>{{row2.recetas}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
