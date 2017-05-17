@@ -20,6 +20,11 @@ public class DietaServiceImpl implements DietaService{
     }
 
     @Override
+    public Dieta findById(int id) {
+        return dietaRepository.findById(id);
+    }
+
+    @Override
     public void save(Dieta dieta) {
         dietaRepository.save(dieta);
     }

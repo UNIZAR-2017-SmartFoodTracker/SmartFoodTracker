@@ -87,7 +87,7 @@ public class InventarioController {
                         mesS = mes + "";
                     }
                     String mesAnio = mesS + "" + anioS.substring(2, 4);
-                    costeService.save(new Coste(usuario, mesAnio, inventario.getCoste()));
+                    costeService.save(new Coste(usuario, mesAnio, inventario.getCoste() * inventario.getCantidad()));
 
                     log.info("Nuevo producto " + producto.getNombre() + " añadido al inventario de " + usuario.getUsername());
                     return new ResponseEntity<>(HttpStatus.CREATED);
@@ -137,7 +137,8 @@ public class InventarioController {
                             mesS = mes + "";
                         }
                         String mesAnio = mesS + "" + anioS.substring(2, 4);
-                        costeService.save(new Coste(usuario, mesAnio, productoInventario.getCoste()));
+                        int dif = nuevaCantidad - cantidadAnterior;
+                        costeService.save(new Coste(usuario, mesAnio, productoInventario.getCoste() * dif));
                     }
 //                    if (i.getCantidad() < i.getCantidadMinima()) {
 //                        emailService.faltaCantidad(i); // Envia mensaje

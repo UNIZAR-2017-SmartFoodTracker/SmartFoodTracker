@@ -17,6 +17,11 @@ public class RecetaServiceImpl implements RecetaService {
     }
 
     @Override
+    public Receta findById(int id) {
+        return recetaRepository.findById(id);
+    }
+
+    @Override
     public void save(Receta receta) {
         recetaRepository.save(receta);
     }

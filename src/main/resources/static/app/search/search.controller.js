@@ -10,6 +10,8 @@
     /* @ngInject */
     function SearchController($http, AlertService, LoginService) {
         var vm = this;
+        var cambiarReceta = false;
+        var cambiarDieta = false;
         vm.search = null;
         vm.searchCal = null;
 
@@ -73,7 +75,8 @@
                     vm.ratingsRecetas[id] = 0;
 
                     for(var j = 0; j < recetasUsuario.length; j++){
-                        if(recetasUsuario[j].recetas.id === id){
+                        console.log(recetasUsuario[j]);
+                        if(recetasUsuario[j].receta.id === id){
                             vm.ratingsRecetas[id] = recetasUsuario[j].valoracion;
                         }
                     }
@@ -118,7 +121,7 @@
                     vm.ratingsDietas[id] = 0;
 
                     for(var j = 0; j < dietasUsuario.length; j++){
-                        if(dietasUsuario[j].dietas.id === id){
+                        if(dietasUsuario[j].dieta.id === id){
                             vm.ratingsDietas[id] = dietasUsuario[j].valoracion;
                         }
                     }
@@ -141,11 +144,11 @@
         ////////////////
 
         function changeRatingDieta(dieta){
-            if(vm.ratingsDietas[dieta.id] !== undefined){
+            if(vm.ratingsDietas[dieta.id] !== undefined && cambiarDieta){
                 console.log('Cambiando rating dieta');
                 console.log(dieta);
                 console.log(vm.ratingsDietas[dieta.id]);
-
+                cambiarDieta = false;
                 var data = {
                     username: usuario,
                     idDieta: dieta.id,
@@ -162,14 +165,17 @@
                     }
                 );
             }
+            else {
+                cambiarDieta = true;
+            }
         }
 
         function changeRatingReceta(receta){
-            if(vm.ratingsRecetas[receta.id] !== undefined){
+            if(vm.ratingsRecetas[receta.id] !== undefined && cambiarReceta){
                 console.log('Cambiando rating receta');
                 console.log(receta);
                 console.log(vm.ratingsRecetas[receta.id]);
-
+                cambiarReceta = false;
                 var data = {
                     username: usuario,
                     idReceta: receta.id,
@@ -185,6 +191,9 @@
                         AlertService.addAlert('danger', 'Error al cambiar la valoracion de la receta ' + receta.title);
                     }
                 );
+            }
+            else {
+                cambiarReceta = true;
             }
         }
 

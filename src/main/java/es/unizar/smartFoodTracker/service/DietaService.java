@@ -10,6 +10,7 @@ import java.util.List;
 public interface DietaService {
 
     List<Dieta> findAll();
+    Dieta findById(int id);
 
     void save(Dieta dieta);
 }
