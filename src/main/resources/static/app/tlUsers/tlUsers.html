@@ -17,7 +17,7 @@
                 </h1>
                 <div class="jumbotron">
                     <div class="container text-center">
-                        <p>¡Uy! Parece ser que no existen recetas asociadas a su cuenta</p>
+                        <p>¡Uy! Parece ser que no existen más recetas en el sistema</p>
                     </div>
                 </div>
             </div>
@@ -28,6 +28,9 @@
                 <table ng-table="vm.recetasTable" class="table table-bordered">
                     <tbody ng-repeat="row in $data" ng-form="rowForm" style="text-align: center">
                     <tr>
+                        <td data-title="'Usuario'" sortable="'usuario'"
+                            filter="{usuario: 'text'}">{{row.usuario}}
+                        </td>
                         <td data-title="'Nombre'" sortable="'nombreReceta'"
                             filter="{nombreReceta: 'text'}">{{row.nombreReceta}}
                         </td>
@@ -41,10 +44,13 @@
                             <button class="btn btn-default btn-sm" data-toggle="collapse"
                                     data-target="#r{{row.id}}"><span class="glyphicon glyphicon-th-list"></span>
                             </button>
+                            <button class="btn btn-default btn-sm" ng-click="vm.suscribeReceta(row)">
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </button>
                         </td>
                     </tr>
                     <tr class="collapse" id="r{{row.id}}">
-                        <td colspan="2" style="text-align: left;">
+                        <td colspan="3" style="text-align: left;">
                             <strong>Descripción:</strong><br>{{row.descripcion}}
                         </td>
                         <td colspan="2" style="text-align: left;">
@@ -66,7 +72,7 @@
                 </h1>
                 <div class="jumbotron">
                     <div class="container text-center">
-                        <p>¡Uy! Parece ser que no existen dietas asociadas a su cuenta</p>
+                        <p>¡Uy! Parece ser que no existen más dietas en el sistema</p>
                     </div>
                 </div>
             </div>
@@ -77,8 +83,11 @@
                 <table ng-table="vm.dietasTable" class="table table-bordered">
                     <tbody ng-repeat="row2 in $data" ng-form="rowForm" style="text-align: center">
                     <tr>
-                        <td data-title="'Nombre'" sortable="'nombreReceta'"
-                            filter="{nombreReceta: 'text'}">{{row2.nombreDieta}}
+                        <td data-title="'Usuario'" sortable="'usuario'"
+                            filter="{usuario: 'text'}">{{row2.usuario}}
+                        </td>
+                        <td data-title="'Nombre'" sortable="'nombreDieta'"
+                            filter="{nombreDieta: 'text'}">{{row2.nombreDieta}}
                         </td>
                         <td data-title="'Calorías'" sortable="'calorias'"
                             filter="{calorias: 'number'}">{{row2.calorias}}
@@ -89,6 +98,9 @@
                         <td style="white-space:nowrap;">
                             <button class="btn btn-default btn-sm" data-toggle="collapse"
                                     data-target="#d{{row2.id}}"><span class="glyphicon glyphicon-th-list"></span>
+                            </button>
+                            <button class="btn btn-default btn-sm" ng-click="vm.suscribeDieta(row2)">
+                                <span class="glyphicon glyphicon-star-empty"></span>
                             </button>
                         </td>
                     </tr>

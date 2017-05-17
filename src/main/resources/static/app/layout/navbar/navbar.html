@@ -10,23 +10,29 @@
     <div class="navbar-collapse collapse" uib-collapse="isCollapsed">
         <div class="pull-right navbar-logo">
             <ul class="nav navbar-nav pull-right" ng-switch on="vm.isLogged()">
-                <!--<li uib-dropdown>-->
-                    <!--<a href="#" uib-dropdown-toggle>Información <b class="caret"></b></a>-->
-                    <!--<ul uib-dropdown-menu role="menu" aria-labelledby="single-button">-->
-                        <!--<li role="menuitem">-->
-                            <!--<a ui-sref="home" ng-click="isCollapsed=true">Vista general</a>-->
-                        <!--</li>-->
-                        <!--<li role="menuitem">-->
-                            <!--<a ui-sref="ada" ng-click="isCollapsed=true">Edificio Ada Byron</a>-->
-                        <!--</li>-->
-                        <!--<li role="menuitem">-->
-                            <!--<a ui-sref="betan" ng-click="isCollapsed=true">Edificio Betancourt</a>-->
-                        <!--</li>-->
-                        <!--<li role="menuitem">-->
-                            <!--<a ui-sref="torres" ng-click="isCollapsed=true">Edificio Torres Quevedo</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
+                <li uib-dropdown ng-switch-when="true">
+                    <a href="#" uib-dropdown-toggle>Cuenta<b class="caret"></b></a>
+                    <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                        <li role="menuitem">
+                            <a ui-sref="gestionInventario" ng-click="isCollapsed=true">
+                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                <span>Gestionar Inventario</span>
+                            </a>
+                        </li>
+                        <li role="menuitem">
+                            <a ui-sref="historial" ng-click="isCollapsed=true">
+                                <span class="glyphicon glyphicon-time"></span>&nbsp;
+                                <span>Historial</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" ng-click="vm.logout()" id="logout">
+                                <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                                <span>Cerrar sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <a href="" ng-switch-when="true" ng-click="vm.addProduct()" id="addProduct">
                         <span class="glyphicon glyphicon-apple"></span>&nbsp;
@@ -46,21 +52,9 @@
                     </a>
                 </li>
                 <li>
-                    <a ui-sref="historial" ng-switch-when="true">
+                    <a ui-sref="oUsuarios" ng-switch-when="true">
                         <span class="glyphicon glyphicon-time"></span>&nbsp;
-                        <span>Historial</span>
-                    </a>
-                </li>
-                <li>
-                    <a ui-sref="gestionInventario" ng-switch-when="true">
-                        <span class="glyphicon glyphicon-wrench"></span>&nbsp;
-                        <span>Gestionar Inventario</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="" ng-switch-when="true" ng-click="vm.logout()" id="logout">
-                        <span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                        <span>Cerrar sesión</span>
+                        <span>Otros usuarios</span>
                     </a>
                 </li>
             </ul>
