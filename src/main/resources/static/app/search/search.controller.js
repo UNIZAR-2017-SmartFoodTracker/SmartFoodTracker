@@ -5,46 +5,56 @@
         .module('app.search')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$http', 'AlertService'];
+    SearchController.$inject = ['$http', 'AlertService', 'LoginService'];
 
     /* @ngInject */
-    function SearchController($http, AlertService) {
+    function SearchController($http, AlertService, LoginService) {
         var vm = this;
         vm.search = null;
         vm.searchCal = null;
 
         vm.dietasAPI = [];
         vm.recetasAPI = [];
+        vm.ratingsRecetas = [];
+        vm.ratingsDietas = [];
 
-        // vm.dietasAPI = [
-        //     {
-        //         title: 'Cucurucho',
-        //         content: 'Primera comida: follar' +
-        //         'Segunda comida: un cacahuete' +
-        //         'Tercera comida: follar' +
-        //         'Cuarta comida: otro cacahuete'
-        //     },
-        //     {
-        //         title: 'Alcaparra',
-        //         content: 'Primera y única comida: alcaparra'
-        //     }
-        // ];
-        // vm.recetasAPI = [
-        //     {
-        //         title: 'Pene al vodka',
-        //         content: 'Pues primero se coge el pene, luego se le echa vodka, y ale.'
-        //     },
-        //     {
-        //         title: 'Canelones',
-        //         content: 'Los compras congelados, los descongelas, y ale.'
-        //     }
-        // ];
+        var usuario = LoginService.currentLoggedUser().username;
+
+        var dietasUsuario = [];
+        var recetasUsuario = [];
+
+        $http.get("/api/recetasHistorial/" + usuario).then(
+            function (response) { //success
+                console.log('Recetas historial');
+                response.data.forEach(function (recetaHistorial) {
+                    console.log(recetaHistorial);
+                    recetasUsuario.push(recetaHistorial);
+                })
+            },
+            function (response) { //error
+                AlertService.addAlert('danger', 'Error al obtener las recetas guardadas de ' + usuario);
+            }
+        );
+
+        $http.get("/api/dietasHistorial/" + usuario).then(
+            function (response) { //success
+                console.log('Dietas historial');
+                response.data.forEach(function (dietaHistorial) {
+                    console.log(dietaHistorial);
+                    dietasUsuario.push(dietaHistorial);
+                })
+            },
+            function (response) { //error
+                AlertService.addAlert('danger', 'Error al obtener las dietas guardadas de ' + usuario);
+            }
+        );
 
         $http.get("/api/recetas/").then(
             function (response) { //success
                 var objetoRecetas = response.data;
 
                 for (var i = 0; i < objetoRecetas.length; i++) {
+                    var id = objetoRecetas[i].id;
                     var nombreProducto = objetoRecetas[i].nombre;
                     var cantidad = objetoRecetas[i].descripcion;
                     var arrayProductos = objetoRecetas[i].productos;
@@ -54,10 +64,19 @@
                     }
 
                     vm.recetasAPI.push({
+                        id: id,
                         title: nombreProducto,
                         content: cantidad,
                         calories: calories
                     });
+
+                    vm.ratingsRecetas[id] = 0;
+
+                    for(var j = 0; j < recetasUsuario.length; j++){
+                        if(recetasUsuario[j].recetas.id === id){
+                            vm.ratingsRecetas[id] = recetasUsuario[j].valoracion;
+                        }
+                    }
                 }
             },
             function (response) { //error
@@ -69,16 +88,17 @@
         $http.get("/api/dietas/").then(
             function (response) { //success
                 var objetoDietas = response.data;
-                console.log(objetoDietas);
+                //console.log(objetoDietas);
 
                 for (var i = 0; i < objetoDietas.length; i++) {
+                    var id = objetoDietas[i].id;
                     var nombreProducto = objetoDietas[i].nombre;
                     var cantidad = objetoDietas[i].descripcion;
                     var arrayRecetas = objetoDietas[i].recetas;
                     var calories = 0;
 
-                    console.log(arrayRecetas);
-                    console.log(arrayRecetas[0].productos);
+                    //console.log(arrayRecetas);
+                    //console.log(arrayRecetas[0].productos);
                     for (var j=0; j < arrayRecetas.length; j++) {
                         var arrayProductosDieta = arrayRecetas[j].productos;
                         for (var k=0; k < arrayProductosDieta.length; k++) {
@@ -86,13 +106,22 @@
                         }
 
                     }
-                    console.log(calories);
+                    //console.log(calories);
 
                     vm.dietasAPI.push({
+                        id: id,
                         title: nombreProducto,
                         content: cantidad,
                         calories: calories
                     });
+
+                    vm.ratingsDietas[id] = 0;
+
+                    for(var j = 0; j < dietasUsuario.length; j++){
+                        if(dietasUsuario[j].dietas.id === id){
+                            vm.ratingsDietas[id] = dietasUsuario[j].valoracion;
+                        }
+                    }
                 }
             },
             function (response) { //error
@@ -103,11 +132,61 @@
         vm.filter = filter;
         vm.getDietas = getDietas;
         vm.getRecetas = getRecetas;
+        vm.changeRatingDieta = changeRatingDieta;
+        vm.changeRatingReceta = changeRatingReceta;
 
         vm.dietas = vm.dietasAPI;
         vm.recetas = vm.recetasAPI;
 
         ////////////////
+
+        function changeRatingDieta(dieta){
+            if(vm.ratingsDietas[dieta.id] !== undefined){
+                console.log('Cambiando rating dieta');
+                console.log(dieta);
+                console.log(vm.ratingsDietas[dieta.id]);
+
+                var data = {
+                    username: usuario,
+                    idDieta: dieta.id,
+                    valoracion: vm.ratingsDietas[dieta.id]
+                };
+
+                $http.post("/api/dietasHistorial", data).then(
+                    function (response) { //success
+                        AlertService.addAlert('success','Exito: Se ha actualizado la valoracion de la dieta ' +
+                        dieta.title + ' a ' + vm.ratingsDietas[dieta.id]);
+                    },
+                    function (response) { //error
+                        AlertService.addAlert('danger', 'Error al cambiar la valoracion de la dieta ' + dieta.title);
+                    }
+                );
+            }
+        }
+
+        function changeRatingReceta(receta){
+            if(vm.ratingsRecetas[receta.id] !== undefined){
+                console.log('Cambiando rating receta');
+                console.log(receta);
+                console.log(vm.ratingsRecetas[receta.id]);
+
+                var data = {
+                    username: usuario,
+                    idReceta: receta.id,
+                    valoracion: vm.ratingsRecetas[receta.id]
+                };
+
+                $http.post("/api/recetasHistorial", data).then(
+                    function (response) { //success
+                        AlertService.addAlert('success','Exito: Se ha actualizado la valoracion de la receta ' +
+                            receta.title + ' a ' + vm.ratingsRecetas[receta.id]);
+                    },
+                    function (response) { //error
+                        AlertService.addAlert('danger', 'Error al cambiar la valoracion de la receta ' + receta.title);
+                    }
+                );
+            }
+        }
 
         function getDietas() {
             return vm.dietas;
