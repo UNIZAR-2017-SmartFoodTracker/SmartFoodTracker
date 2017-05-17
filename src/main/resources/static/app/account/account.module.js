@@ -5,6 +5,7 @@
         'app.account.home',
         'app.account.inventory',
         'app.account.register',
-        'app.account.login'
+        'app.account.login',
+        'app.account.history'
     ])
 })();

@@ -49,6 +49,12 @@
                     templateUrl: 'app/search/search.html',
                     controller: 'SearchController as vm'
 
+                })
+                .state('historial', {
+                    url: '/historial',
+                    templateUrl: 'app/account/history/history.html',
+                    controller: 'HistoryController as vm'
+
                 });
         });
 
