@@ -26,8 +26,8 @@ public class RecetaController {
 
         List<Producto> productos = productoService.findAll();
 
-        //recetaService.save(new Receta("Pastel de la abuela", productos,"Primero coger tomate, luego echarlo, luego polvos magicos y voila!"));
-        //recetaService.save(new Receta("Canelones", productos,"Comprarlos congelados, meterlos en el microondas, y voila!"));
+        //recetaService.save(new Receta("Pastel de la abuela", productos,"Primero coger tomate, luego echarlo, luego polvos magicos y voila! Contiene cacahuetes y cereales con gluten"));
+        //recetaService.save(new Receta("Canelones", productos,"Comprarlos congelados, meterlos en el microondas, y voila! Contiene leche y derivados."));
 
         return recetaService.findAll();
     }

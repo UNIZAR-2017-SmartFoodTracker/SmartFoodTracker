@@ -23,8 +23,8 @@ public class DietaController {
     @GetMapping(value = "/dietas")
     public @ResponseBody List<Dieta> getRecetas () {
 
-        //dietaService.save(new Dieta("Adelgazamiento extremo", recetaService.findAll(),"Ideal para perder peso"));
-        //dietaService.save(new Dieta("Adelgazamiento moderado", recetaService.findAll(),"Coger primero receta abuela y luego receta canelones"));
+        //dietaService.save(new Dieta("Adelgazamiento extremo", recetaService.findAll(),"Ideal para perder peso. Contiene cacahuetes."));
+        //dietaService.save(new Dieta("Adelgazamiento moderado", recetaService.findAll(),"Coger primero receta abuela y luego receta canelones. Contiene soja."));
 
         return dietaService.findAll();
     }
