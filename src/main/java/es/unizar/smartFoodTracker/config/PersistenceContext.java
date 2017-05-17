@@ -1,5 +1,6 @@
 package es.unizar.smartFoodTracker.config;
 
+import es.unizar.smartFoodTracker.model.DietaSuscripcion;
 import es.unizar.smartFoodTracker.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,6 +42,12 @@ public class PersistenceContext {
 
     @Bean
     DietaServiceImpl dietaService() { return new DietaServiceImpl(); }
+
+    @Bean
+    RecetaSusctipcionServiceImpl recetaSusctipcionService() { return new RecetaSusctipcionServiceImpl(); }
+
+    @Bean
+    DietaSuscripcionServiceImpl dietaSuscripcionService() { return new DietaSuscripcionServiceImpl(); }
 
     @Bean
     SimpleMailMessage templateMessage(){

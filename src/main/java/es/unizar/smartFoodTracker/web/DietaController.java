@@ -1,13 +1,15 @@
 package es.unizar.smartFoodTracker.web;
 
-import es.unizar.smartFoodTracker.model.Dieta;
+import es.unizar.smartFoodTracker.model.*;
 import es.unizar.smartFoodTracker.service.DietaService;
+import es.unizar.smartFoodTracker.service.DietaSuscripcionService;
 import es.unizar.smartFoodTracker.service.RecetaService;
+import es.unizar.smartFoodTracker.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +20,10 @@ public class DietaController {
     @Autowired
     private DietaService dietaService;
     @Autowired
+    private UsuarioService usuarioService;
+    @Autowired
+    private DietaSuscripcionService dietaSuscripcionService;
+    @Autowired
     private RecetaService recetaService;
 
     @GetMapping(value = "/dietas")
@@ -27,5 +33,32 @@ public class DietaController {
         //dietaService.save(new Dieta("Adelgazamiento moderado", recetaService.findAll(),"Coger primero receta abuela y luego receta canelones. Contiene soja."));
 
         return dietaService.findAll();
+    }
+
+
+    @GetMapping(value = "/dietasHistorial")
+    public @ResponseBody List<DietaSuscripcion> getHistorialRecetas () {
+        return dietaSuscripcionService.findAll();
+    }
+
+    @PostMapping(value = "/dietas")
+    public ResponseEntity<?> postReceta (@RequestBody Dieta dieta) {
+        dietaService.save(dieta);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/dietasHistorial")
+    public ResponseEntity<?> postRecetasHistorial (@RequestBody DietaSuscripcionName dietaSuscripcionName) {
+        Usuario u = usuarioService.findByUsername(dietaSuscripcionName.getUsername());
+        Dieta d = dietaService.findById(dietaSuscripcionName.getIdDieta());
+        dietaSuscripcionService.save(new DietaSuscripcion(u, d, dietaSuscripcionName.getValoracion()));
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/dietasHistorial/{username:.*}")
+    public @ResponseBody List<DietaSuscripcion> getHistorialRecetasByUsuario
+            (@PathVariable String username) {
+        Usuario usuario = usuarioService.findByUsername(username);
+        return dietaSuscripcionService.findByUsuario(usuario);
     }
 }

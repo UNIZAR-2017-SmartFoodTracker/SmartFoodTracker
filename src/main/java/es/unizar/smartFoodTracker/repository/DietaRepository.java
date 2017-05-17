@@ -9,4 +9,5 @@ import java.util.List;
 public interface DietaRepository extends JpaRepository<Dieta, Long> {
 
     List<Dieta> findAll();
+    Dieta findById(int id);
 }

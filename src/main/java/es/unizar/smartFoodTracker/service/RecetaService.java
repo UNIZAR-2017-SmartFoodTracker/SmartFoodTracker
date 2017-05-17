@@ -8,6 +8,7 @@ import java.util.List;
 public interface RecetaService {
 
     List<Receta> findAll();
+    Receta findById(int id);
 
     void save(Receta receta);
 }
