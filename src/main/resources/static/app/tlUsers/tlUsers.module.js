@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    angular.module('app.account.history',[
+    angular.module('app.tlUsers',[
         'ui.bootstrap',
         'ngMaterial',
         'ngTable'

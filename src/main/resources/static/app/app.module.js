@@ -13,7 +13,8 @@
             'app.landing',
             'app.layout',
             'app.productModal',
-            'app.search'])
+            'app.search',
+            'app.tlUsers'])
         .config(function ($stateProvider, $urlRouterProvider, $logProvider, $locationProvider) {
             $logProvider.debugEnabled(false);
             $locationProvider.html5Mode(true);
@@ -54,6 +55,12 @@
                     url: '/historial',
                     templateUrl: 'app/account/history/history.html',
                     controller: 'HistoryController as vm'
+
+                })
+                .state('oUsuarios', {
+                    url: '/oUsuarios',
+                    templateUrl: 'app/tlUsers/tlUsers.html',
+                    controller: 'TlUsersController as vm'
 
                 });
         });
