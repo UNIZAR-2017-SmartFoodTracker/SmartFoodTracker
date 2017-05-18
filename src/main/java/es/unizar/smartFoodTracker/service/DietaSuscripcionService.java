@@ -1,5 +1,6 @@
 package es.unizar.smartFoodTracker.service;
 
+import es.unizar.smartFoodTracker.model.Dieta;
 import es.unizar.smartFoodTracker.model.DietaSuscripcion;
 import es.unizar.smartFoodTracker.model.Usuario;
 
@@ -12,6 +13,7 @@ public interface DietaSuscripcionService {
 
     List<DietaSuscripcion> findAll();
     List<DietaSuscripcion> findByUsuario(Usuario usuario);
+    DietaSuscripcion findByUsuarioAndDieta(Usuario usuario, Dieta dieta);
 
     void save(DietaSuscripcion dietaSuscripcion);
 

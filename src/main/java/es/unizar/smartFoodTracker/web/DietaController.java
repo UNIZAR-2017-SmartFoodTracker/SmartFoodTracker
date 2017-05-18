@@ -48,10 +48,17 @@ public class DietaController {
     }
 
     @PostMapping(value = "/dietasHistorial")
-    public ResponseEntity<?> postRecetasHistorial (@RequestBody DietaSuscripcionName dietaSuscripcionName) {
+    public ResponseEntity<?> postDietasHistorial (@RequestBody DietaSuscripcionName dietaSuscripcionName) {
         Usuario u = usuarioService.findByUsername(dietaSuscripcionName.getUsername());
         Dieta d = dietaService.findById(dietaSuscripcionName.getIdDieta());
-        dietaSuscripcionService.save(new DietaSuscripcion(u, d, dietaSuscripcionName.getValoracion()));
+        DietaSuscripcion dietaSuscripcion = dietaSuscripcionService.findByUsuarioAndDieta(u, d);
+        if (dietaSuscripcion == null) {
+            dietaSuscripcionService.save(new DietaSuscripcion(u, d, dietaSuscripcionName.getValoracion()));
+        }
+        else {
+            dietaSuscripcion.setValoracion(dietaSuscripcionName.getValoracion());
+            dietaSuscripcionService.save(dietaSuscripcion);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
